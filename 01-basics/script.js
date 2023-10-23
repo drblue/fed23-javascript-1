@@ -89,15 +89,19 @@ console.log("Also part of Pelle: " + morePartsOfPelle);
 */
 
 let email;
-// email = "jn@thehiveresistance.com"; // ska returnera 20 + 'com'
-// email = "some@dude.org"; // ska returnera 9 + 'org'
-// email = "bgates@microsoft.com"; // ska returnera 16 + 'com'
-// email = "some.brittish.dude@bt.co.uk"; // ska returnera 24 + 'uk'
+email = "jn@thehiveresistance.com"; // ska returnera 20 + 'com'
+email = "some@dude.org"; // ska returnera 9 + 'org'
+email = "bgates@microsoft.com"; // ska returnera 16 + 'com'
+email = "some.brittish.dude@bt.co.uk"; // ska returnera 24 + 'uk'
+console.log("Email is: " + email);
 
 // Hitta sista punkten i variabeln `email` och skriv ut till console
 // Ska fungera oavsett vad för värde `email` har, utan att behöva ändra koden
 // "The last dot for email EMAIL is at index: 42"
+let indexOfLastDot = email.lastIndexOf(".");
+console.log("The last dot for email is at index: " + indexOfLastDot);
 
 // Med hjälp av föregående kod, ta ut allting EFTER sista punkten i
 // `email` och skriv till console
 // "The top domain for email EMAIL is: DOMAIN"
+console.log("The top domain for email is: " + email.slice(indexOfLastDot + 1));
