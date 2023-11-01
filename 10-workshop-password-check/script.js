@@ -16,9 +16,9 @@
 
 let password;
 // password = "password"; // inte giltigt
-password = "pa$$wd"; // giltigt
+// password = "pa$$wd"; // giltigt
 // password = "pa$sword"; // giltigt
-// password = "p@$swd"; // giltigt
+password = "p@*swd"; // giltigt
 // password = "p@ssw%rd"; // giltigt
 // password = "pa$$word"; // giltigt
 // password = "secretpassword"; // inte giltigt
@@ -42,6 +42,9 @@ for (let i = 0; i < specialChars.length; i++) {
 
 	if (password.includes(specialChar)) {
 		specialCharCount++;
+		if (specialCharCount === 2) {  // if we found 2 special chars, break free from the loop
+			break;  // i want to
+		}
 	}
 }
 console.log("Loop is done, found:", specialCharCount);
