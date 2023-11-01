@@ -2,7 +2,7 @@
  * Workshop: Password Checker
  *
  * Skriv kod som kollar att lösenordet i variabeln password har
- * - minst 6 tecken varav minst två specialtecken enligt nedan
+ * - minst 6 tecken varav minst två (unika) specialtecken enligt nedan
  * - minst 8 tecken varav minst ett specialtecken enligt nedan
  * - eller har minst 12 tecken och minst 1 bindestreck
  * - eller har minst 16 tecken
@@ -16,8 +16,10 @@
 
 let password;
 // password = "password"; // inte giltigt
+password = "pa$$wd"; // giltigt
 // password = "pa$sword"; // giltigt
-password = "p@ssw%rd"; // giltigt
+// password = "p@$swd"; // giltigt
+// password = "p@ssw%rd"; // giltigt
 // password = "pa$$word"; // giltigt
 // password = "secretpassword"; // inte giltigt
 // password = "secret-password"; // giltigt
@@ -31,7 +33,7 @@ const specialChars = [
 
 console.log(`🕵🏻 Checking password '${password}'`);
 
-let hasSpecialChar = false;
+let specialCharCount = 0;
 
 // För varje tecken i specialChars, kolla om password innehåller det tecknet
 for (let i = 0; i < specialChars.length; i++) {
@@ -39,10 +41,10 @@ for (let i = 0; i < specialChars.length; i++) {
 	console.log(`At index ${i}, does password contain '${specialChar}'?`, password.includes(specialChar));
 
 	if (password.includes(specialChar)) {
-		hasSpecialChar = true
+		specialCharCount++;
 	}
 }
-console.log("Loop is done, found:", hasSpecialChar);
+console.log("Loop is done, found:", specialCharCount);
 
 // Har lösenordet minst 16 tecken?
 if (password.length >= 16) {
@@ -56,8 +58,12 @@ if (password.length >= 16) {
 
 // Har lösenordet minst 8 tecken varav minst ett specialtecken?
 // (för varje tecken i specialChars, innehåller password det tecknet? om ja, gör något)
-} else if (password.length >= 8 && hasSpecialChar) {
+} else if (password.length >= 8 && specialCharCount >= 1) {
 	console.log("- ✅ Great! Such password, much secure, very hard to crack!");
+
+// Har lösenordet minst 6 tecken varav minst två specialtecken?
+} else if (password.length >= 6 && specialCharCount >= 2) {
+	console.log("- ✅ Great! Such password, much secure, VERY hard to crack!");
 
 } else {
 	// Nej 😔
