@@ -48,6 +48,11 @@ const calcBoxCircumference = function(width, height) {
 	return width * 2 + height * 2;
 }
 
+// Arrow Function
+const calcBoxArea = (width, height) => {
+	return width * height;
+}
+
 // let sum1 = calcBoxCircumference(20, 40);    // let sum1 = 120
 // let sum2 = calcBoxCircumference(30, 60);
 // console.log("sum1", sum1);
