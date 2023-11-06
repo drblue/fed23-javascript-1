@@ -34,7 +34,7 @@ const passwords = [
 	"p@*swd",								// 🔐
 	"pa$sword",								// 🔐
 	"p@ssw%rd",								// 🔐
-	"pa$$wd",								// 🔐
+	"pa$$wd",								// 🚨
 	"secretpassword",						// 🚨
 	"secret-password",						// 🔐
 	"such-password-much-secure-very-long",	// 🔐
@@ -45,12 +45,7 @@ const specialChars = [
 	"@", "$", "%", "*", "^", "<", ">", "?", "!", "(", ")", "[", "]", "{", "}", "'"
 ];
 
-
-// Iterate over `passwords` and do something for each item in the list (array)
-for (let i = 0; i < passwords.length; i++) {
-	const password = passwords[i];
-	console.log(`Checking password ${password}`);
-
+const countSpecialChars = (password) => {
 	let specialCharCount = 0;
 
 	// För varje tecken i specialChars, kolla om password innehåller det tecknet
@@ -65,6 +60,16 @@ for (let i = 0; i < passwords.length; i++) {
 			}
 		}
 	}
+
+	return specialCharCount;
+}
+
+// Iterate over `passwords` and do something for each item in the list (array)
+for (let i = 0; i < passwords.length; i++) {
+	const password = passwords[i];
+	console.log(`Checking password ${password}`);
+
+	const specialCharCount = countSpecialChars(password);
 
 	// is password long enough?
 	if (password.length >= 16) {
