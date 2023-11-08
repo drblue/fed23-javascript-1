@@ -91,3 +91,15 @@ makeMoreInteresting("OMG OMG OMG", (txt) => {
 	console.log(txt);
 } );
 
+let students = ["Johan", "Pelle", "Börje", "Kajan", "Tiffany"];
+
+/*
+for (let i = 0; i < students.length; i++) {
+	const student = students[i];
+	console.log("Student's name is:", student);
+}
+*/
+
+students.forEach( (student, index) => {
+	console.log(`Student at position ${index} is ${student}`);
+} );
