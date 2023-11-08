@@ -29,8 +29,11 @@ const meowJr = {
 	age: 1,
 	name: "Meow Jr",
 	sound: "meooow!",
+	meowCounter: 0,
 	speak: function() {
 		console.log(`${this.name} says: ${this.sound}`);
+		this.meowCounter++;
+		console.log(`Meowed times today: ${this.meowCounter}`);
 	},
 	info: () => {  // don't use arrow functions in methods on objects as the `this` context object isn't updated to reflect the object it is run on
 		console.log("meowjr:", this);
@@ -47,4 +50,4 @@ const meowJr = {
 // petSpeak(barksby);
 // petSpeak(meowJr);
 
-console.log("this outside of an object:", this);
+// console.log("this outside of an object:", this);
