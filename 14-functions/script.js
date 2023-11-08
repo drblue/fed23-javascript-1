@@ -44,6 +44,7 @@ const greetUser = function(username, time = "day") {
 // sayHi(username);
 // console.log(username);
 
+/*
 const calcBoxCircumference = function(width, height) {
 	return width * 2 + height * 2;
 }
@@ -68,3 +69,25 @@ if (ci > 100) {
 }
 
 console.log("Circumference of box with height 20 and width 40 is:", calcBoxCircumference(40, 20));
+*/
+
+// Callbacks
+const logToConsole = (txt) => {
+	console.log(txt);
+}
+
+const nagUser = (txt) => {
+	alert(txt);
+}
+
+const makeMoreInteresting = (msg, callback) => {
+	const interesting = msg + "!!!!!!!!!!!!!!";
+	callback(interesting);
+}
+
+// makeMoreInteresting("JavaScript", logToConsole );
+
+makeMoreInteresting("OMG OMG OMG", (txt) => {
+	console.log(txt);
+} );
+
