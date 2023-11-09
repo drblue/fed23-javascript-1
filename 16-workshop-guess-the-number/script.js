@@ -20,6 +20,15 @@
  * ✅ Spara ner hur många gissningar som krävdes. Visa antalet gissningar när
  * användaren gissat rätt.
  *
+ * STEG 4
+ * Efter att man gissat rätt så slumpa fram ett nytt tal och starta om spelet.
+ *
+ * STEG 5
+ * Spara en "highscore", dvs hur få gånger som krävts för att gissa rätt.
+ * Om användaren gissar rätt på fler gånger, visa "Tyvärr du gissade rätt på
+ * ${tries} antal försök men din highscore är ${highscore}".
+ * Om användaren gissar rätt på färre gånger, visa "YAY NEW HIGHSCORE! ${highscore}"
+ *
  */
 
 // Get a random number between 1 and `max` (default 10)
