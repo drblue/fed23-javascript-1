@@ -9,11 +9,11 @@
  * ✅ Om användaren skriver in talet 0 så ska spelet avslutas.
  *
  * STEG 1.5
- * Berätta för användaren om gissningen är för låg eller för hög. Naturligtvis
+ * ✅ Berätta för användaren om gissningen är för låg eller för hög. Naturligtvis
  * ska de få gissa igen efter detta.
  *
  * STEG 2
- * Slumpa talet (med hjälp av funktionen `getRandomNumber()` nedan) som
+ * ✅ Slumpa talet (med hjälp av funktionen `getRandomNumber()` nedan) som
  * användaren ska gissa, så att de inte gissar rätt varje gång.
  *
  * STEG 3
@@ -27,8 +27,10 @@ const getRandomNumber = (max = 10) => {
 	return Math.ceil( Math.random() * max );
 }
 
-let numberToGuess = 5;
+let numberToGuess = getRandomNumber();
 let continueGame = true;
+
+console.log("🐆😈 numberToGuess:", numberToGuess);
 
 while (continueGame) {
 	let guess = Number( prompt("Please guess a number between 1-10. Enter 0 to quit.") );
@@ -46,7 +48,22 @@ while (continueGame) {
 		alert("Y U GIVE UP?!");
 		continueGame = false;
 
+	} else if (guess > numberToGuess) {
+		// Guess was too high
+		console.log("Guess was too high");
+		alert("Guess was too high");
+
+	} else if (guess < numberToGuess) {
+		// Guess was too low
+		console.log("Guess was lower than GlocalNet");
+		alert("Guess was too low");
+
+	} else {
+		console.log("That's not a number");
+		alert("That's not a number");
+
 	}
+
 }
 
 console.log("Game ended");
