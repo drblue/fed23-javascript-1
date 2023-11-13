@@ -1,0 +1,18 @@
+p.error {
+	color: green;
+}
+
+div.error {
+	color: red;
+}
+
+span.secret {
+	display: none;
+}
+
+.lol {
+	color: magenta;
+	font-size: 40rem;
+	font-style: italic;
+	font-weight: bold;
+}
