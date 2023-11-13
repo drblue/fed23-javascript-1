@@ -35,12 +35,14 @@ firstParagraph.innerText = "Look ma, my first paragraph!";
 firstParagraph.innerText += " Oh I forgot this!";
 */
 
+/*
 const alertEl = document.querySelector(".alert");
 console.log('alertEl:', alertEl);
 
 console.log('alertEl innerHTML:', alertEl.innerHTML);
 console.log('alertEl innerText:', alertEl.innerText);
 console.log('alertEl textContent:', alertEl.textContent);
+*/
 
 // Change content
 // alertEl.innerText = "Such error, much danger, very fail";
@@ -69,3 +71,21 @@ const liEls2 = linkListEl.querySelectorAll('li');
 // Get and set attributes
 // document.querySelector("img").getAttribute("src")
 // document.querySelector("img").setAttribute("src", "https://media.tenor.com/tNGtfhqJWP0AAAAd/haxor.gif")
+
+const btnPopupEl = document.querySelector("button");
+console.log("Such button text:", btnPopupEl.innerText);
+
+btnPopupEl.addEventListener("click", () => {
+	alert("Stop it, that ticles! 😂");
+});
+
+const btnSayHiEl = document.querySelector("#btnSayHi");
+const inputNameEl = document.querySelector("#inputName");
+
+btnSayHiEl.addEventListener("click", () => {
+	// Get user name
+	const inputName = inputNameEl.value;
+
+	// Say hi to the nice user
+	alert(`Hi ${inputName}`);
+});
