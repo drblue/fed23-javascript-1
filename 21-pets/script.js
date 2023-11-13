@@ -41,17 +41,41 @@ const pets = [
 			console.log(`Meowed times today: ${this.meowCounter}`);
 		}
 	},
-	// {
-	// 	hobbies: ["Be cute"],
-	// 	species: "Old kitten",
-	// 	age: 9,
-	// 	name: "Meow Sr",
-	// 	sound: "meooow!",
-	// 	meowCounter: 0,
-	// 	speak() { // same as writing "speak: function() {}"
-	// 		this.meowCounter++;
-	// 		console.log(this.sound);
-	// 		console.log(`Meowed times today: ${this.meowCounter}`);
-	// 	}
-	// }
+	{
+		hobbies: ["Be cute"],
+		species: "Old kitten",
+		age: 9,
+		name: "Meow Sr",
+		sound: "meooow!",
+		meowCounter: 0,
+		speak() { // same as writing "speak: function() {}"
+			this.meowCounter++;
+			console.log(this.sound);
+			console.log(`Meowed times today: ${this.meowCounter}`);
+		}
+	}
 ];
+
+// Get a reference to the DOM-element with ID of "petslist"
+const petsEl = document.querySelector("#petslist");
+
+// Loop over pets
+pets.forEach( (pet) => {
+	console.log(pet);
+
+	// let petOwnerName = "missing";
+	// if (pet.owner) {
+	// 	petOwnerName = pet.owner.name;
+	// }
+
+	const petOwnerName = pet.owner
+		? pet.owner.name
+		: "missing";
+
+	petsEl.innerHTML += `
+		<li>
+			${pet.name} is a ${pet.species} of ${pet.age} year(s) old.
+			His owner is ${petOwnerName} and his favorite hobbies is to ${pet.hobbies.join(", ")}.
+		</li>
+	`;
+} );
