@@ -63,9 +63,13 @@ document.querySelector("ul").addEventListener("click", (e) => {
 
 	// If the clicked element is a LI-tag, then toggle the completed class
 	// Otherwise don't do anything
-	if (e.target.tagName === "LI") {
-		// Toggle the `completed` class on the clicked element
-		e.target.classList.toggle("completed");
+	if (e.target.tagName === "LI" && e.target.classList.contains("completed")) {
+		// It was completed, let's remove it entierly
+		e.target.remove();
+
+	} else if (e.target.tagName === "LI") {
+		// It was not completed, mark it as completed
+		e.target.classList.add("completed");
 	}
 });
 
