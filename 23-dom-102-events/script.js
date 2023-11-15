@@ -32,10 +32,9 @@ document.querySelector('#add').addEventListener("click", () => {
 
 	// Also add a click-event listener to the new listitem
 	newLiEl.addEventListener("click", (e) => {
-		console.log("yey you clicked on the NEW:", e.target);
+		e.stopPropagation();  // steal dat 🎈 (stop event from bubbling up in the hierarchy)
+		console.log("yey you clicked on a listitem:", e);
 
-		// if target has class `completed`, remove it
-		// if target DOES NOT have class `completed`, add it
 		e.target.classList.toggle("completed");
 	});
 
@@ -47,10 +46,14 @@ document.querySelector('#add').addEventListener("click", () => {
 document.querySelectorAll("li").forEach(liEl => {
 	// Add click-event handler to each listitem
 	liEl.addEventListener("click", (e) => {
-		console.log("yey you clicked on:", e.target);
+		e.stopPropagation();  // steal dat 🎈 (stop event from bubbling up in the hierarchy)
+		console.log("yey you clicked on a listitem:", e);
 
-		// if target has class `completed`, remove it
-		// if target DOES NOT have class `completed`, add it
 		e.target.classList.toggle("completed");
 	});
+});
+
+// Listen for click-events on the `ul`
+document.querySelector("ul").addEventListener("click", (e) => {
+	console.log("hello, i am kim, you clicked me", e);
 });
