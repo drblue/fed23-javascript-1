@@ -7,6 +7,11 @@
  * - toggle		adds a class if it doesn't already exist, otherwise removes it
  * - replace	replaces a class with another class
  * - contains	returns true/false if class exists
+ *
+ * document.createElement 	creates a new element of a specific type. does NOT add it to the DOM
+ * parentEl.append(newEl) 	appends AFTER the last element INSIDE the element we select
+ * parentEl.prepend(newEl) 	prepends BEFORE the first element INSIDE the element we select
+ * element.remove()			removes the selected element from the DOM
  */
 
 // Listen for click-events on the "Add"-button
