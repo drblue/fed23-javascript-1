@@ -9,3 +9,10 @@
  * - contains	returns true/false if class exists
  */
 
+// Listen for click-events on the "Add"-button
+document.querySelector('#add').addEventListener("click", () => {
+	// GET reference to ALL `li` elements and the LENGTH of that list (array)
+	const liCount = document.querySelectorAll("li").length;
+
+	document.querySelector("ul").innerHTML += `<li>list item ${liCount + 1}</li>`;
+});

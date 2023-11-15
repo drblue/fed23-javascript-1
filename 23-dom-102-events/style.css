@@ -1,18 +1,4 @@
-p.error {
-	color: green;
-}
-
-div.error {
-	color: red;
-}
-
-span.secret {
-	display: none;
-}
-
-.lol {
-	color: magenta;
-	font-size: 40rem;
+.completed {
 	font-style: italic;
-	font-weight: bold;
+	text-decoration: line-through;
 }
