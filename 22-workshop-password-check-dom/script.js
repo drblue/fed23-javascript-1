@@ -45,37 +45,65 @@ const countSpecialChars = (password) => {
 	return specialCharCount;
 }
 
-const handleCheckPassword = () => {
-	// Get what password the user has typed
-	const password = inputPasswordEl.value;
-
+// Check the password provided as a parameter
+const checkPassword = (password) => {
 	const specialCharCount = countSpecialChars(password);
 
 	// is password long enough?
 	if (password.length >= 16) {
-		resultEl.className = "alert alert-success";
-		resultEl.innerText = "🔐 That's a long password!";
+		return true;
 
 	} else if (password.length >= 12 && password.includes("-")) {
-		resultEl.className = "alert alert-success";
-		resultEl.innerText = "🔐 That's also a pretty good password!";
+		return true;
 
 	} else if (password.length >= 8 && specialCharCount >= 1) {
-		resultEl.className = "alert alert-success";
-		resultEl.innerText = "🔐 That's also a very secure password!";
+		return true;
 
 	} else if (password.length >= 6 && specialCharCount >= 2) {
-		resultEl.className = "alert alert-success";
-		resultEl.innerText = "🔐 That's a VERY secure password home-boi! 🛟";
+		return true;
 
 	} else {
-		resultEl.className = "alert alert-danger";
-		resultEl.innerText = "🚨 Insecure password!";
+		return false;
 	}
 }
 
-// Register click-event handler
-btnCheckEl.addEventListener("click", handleCheckPassword);
+const showInsecurePasswordMsg = () => {
+	resultEl.className = "alert alert-danger";
+	resultEl.innerText = "🚨 OMG, did you even try? 😱";
+}
 
-// Register keyup-event handler
-inputPasswordEl.addEventListener("keyup", handleCheckPassword);
+const showSecurePasswordMsg = () => {
+	resultEl.className = "alert alert-success";
+	resultEl.innerText = "🔐 That's a secure password! I'm stealing that 😈!";
+}
+
+// Check password when the user clicks the button
+btnCheckEl.addEventListener("click", () => {
+	// Get what password the user has typed
+	const pwd = inputPasswordEl.value;
+
+	if (!pwd) {
+		alert("You stupid bro? Need that password, duh!");
+		return;
+	}
+
+	// Pass password along to checkPassword-function
+	if (checkPassword(pwd)) {
+		showSecurePasswordMsg();
+	} else {
+		showInsecurePasswordMsg();
+	}
+});
+
+// Check password as the user types
+inputPasswordEl.addEventListener("keyup", () => {
+	// Get what password the user has typed
+	const pwd = inputPasswordEl.value;
+
+	// Pass password along to checkPassword-function
+	if (checkPassword(pwd)) {
+		showSecurePasswordMsg();
+	} else {
+		showInsecurePasswordMsg();
+	}
+});
