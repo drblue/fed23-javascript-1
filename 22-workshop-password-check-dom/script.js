@@ -54,18 +54,23 @@ btnCheckEl.addEventListener("click", () => {
 
 	// is password long enough?
 	if (password.length >= 16) {
+		resultEl.className = "alert alert-success";
 		resultEl.innerText = "🔐 That's a long password!";
 
 	} else if (password.length >= 12 && password.includes("-")) {
+		resultEl.className = "alert alert-success";
 		resultEl.innerText = "🔐 That's also a pretty good password!";
 
 	} else if (password.length >= 8 && specialCharCount >= 1) {
+		resultEl.className = "alert alert-success";
 		resultEl.innerText = "🔐 That's also a very secure password!";
 
 	} else if (password.length >= 6 && specialCharCount >= 2) {
+		resultEl.className = "alert alert-success";
 		resultEl.innerText = "🔐 That's a VERY secure password home-boi! 🛟";
 
 	} else {
+		resultEl.className = "alert alert-danger";
 		resultEl.innerText = "🚨 Insecure password!";
 	}
 });
