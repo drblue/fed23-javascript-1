@@ -79,3 +79,14 @@ document.querySelector("body").addEventListener("click", (e) => {
 	console.log("hello, i am body, someone clicked on me or my children:", e);
 });
 */
+
+document.querySelector("a").addEventListener("click", (e) => {
+	// This will be executed whenever someone clicks on the link
+	console.log("Such click, much link, very internetz");
+
+	// Prevent user from ever leaving our site 😈
+	e.preventDefault();
+
+	alert("You can check in but you can never leave 😈");
+	// window.location.href = "https://www.bing.com"; // 🤡
+});
