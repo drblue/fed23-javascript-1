@@ -21,12 +21,13 @@ document.querySelector('#add').addEventListener("click", () => {
 
 	// Will **REPLACE** all content in the element with
 	// a **NEW** _string_ that contains both the old and the new content
-	// document.querySelector("ul").innerHTML += `<li>list item ${liCount + 1}</li>`;
+	document.querySelector("ul").innerHTML += `<li>list item ${liCount + 1}</li>`;
 
 	// ANOTHER way to create elements that does NOT replace the old content,
 	// only appends it
 
 	// Create a new `li` element and add some content
+	/*
 	const newLiEl = document.createElement("li");
 	newLiEl.innerText = `list item ${liCount + 1}`;  // "list item 5"
 
@@ -40,8 +41,10 @@ document.querySelector('#add').addEventListener("click", () => {
 
 	// Append the new element to the `ul` list
 	document.querySelector("ul").append(newLiEl);
+	*/
 });
 
+/*
 // Listen for click-events on the listitems
 document.querySelectorAll("li").forEach(liEl => {
 	// Add click-event handler to each listitem
@@ -52,8 +55,23 @@ document.querySelectorAll("li").forEach(liEl => {
 		e.target.classList.toggle("completed");
 	});
 });
+*/
 
 // Listen for click-events on the `ul`
 document.querySelector("ul").addEventListener("click", (e) => {
-	console.log("hello, i am kim, you clicked me", e);
+	console.log("this is UL, you clicked on an element of type:", e.target.tagName);
+
+	// If the clicked element is a LI-tag, then toggle the completed class
+	// Otherwise don't do anything
+	if (e.target.tagName === "LI") {
+		// Toggle the `completed` class on the clicked element
+		e.target.classList.toggle("completed");
+	}
 });
+
+/*
+// Listen for click-events on the `body`
+document.querySelector("body").addEventListener("click", (e) => {
+	console.log("hello, i am body, someone clicked on me or my children:", e);
+});
+*/
