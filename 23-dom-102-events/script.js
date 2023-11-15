@@ -16,3 +16,15 @@ document.querySelector('#add').addEventListener("click", () => {
 
 	document.querySelector("ul").innerHTML += `<li>list item ${liCount + 1}</li>`;
 });
+
+// Listen for click-events on the listitems
+document.querySelectorAll("li").forEach(liEl => {
+	// Add click-event handler to each listitem
+	liEl.addEventListener("click", (e) => {
+		console.log("yey you clicked on:", e.target);
+
+		// if target has class `completed`, remove it
+		// if target DOES NOT have class `completed`, add it
+		e.target.classList.toggle("completed");
+	});
+})
