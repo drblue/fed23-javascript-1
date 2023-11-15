@@ -45,8 +45,7 @@ const countSpecialChars = (password) => {
 	return specialCharCount;
 }
 
-// Register click-event handler
-btnCheckEl.addEventListener("click", () => {
+const handleCheckPassword = () => {
 	// Get what password the user has typed
 	const password = inputPasswordEl.value;
 
@@ -73,4 +72,10 @@ btnCheckEl.addEventListener("click", () => {
 		resultEl.className = "alert alert-danger";
 		resultEl.innerText = "🚨 Insecure password!";
 	}
-});
+}
+
+// Register click-event handler
+btnCheckEl.addEventListener("click", handleCheckPassword);
+
+// Register keyup-event handler
+inputPasswordEl.addEventListener("keyup", handleCheckPassword);
