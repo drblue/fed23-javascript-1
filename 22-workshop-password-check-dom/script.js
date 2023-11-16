@@ -19,7 +19,7 @@
 
 // Get references to elements
 const inputPasswordEl = document.querySelector("#inputPassword");  // <input>
-const btnCheckEl = document.querySelector("#btnCheck");  // <button>
+const formPasswordEl = document.querySelector("#formPassword");  // <form>
 const resultEl = document.querySelector("#result");  // div med resultatet
 
 const specialChars = [
@@ -77,12 +77,15 @@ const showSecurePasswordMsg = () => {
 	resultEl.innerText = "🔐 That's a secure password! I'm stealing that 😈!";
 }
 
-// Check password when the user clicks the button
-btnCheckEl.addEventListener("click", () => {
+// Check password when the user submits the form
+formPasswordEl.addEventListener("submit", (e) => {
+	// Stop form from being submitted
+	e.preventDefault();
+
 	// Get what password the user has typed
 	const pwd = inputPasswordEl.value;
 
-	if (!pwd) {
+	if (pwd.length < 6) {
 		alert("You stupid bro? Need that password, duh!");
 		return;
 	}
@@ -90,11 +93,20 @@ btnCheckEl.addEventListener("click", () => {
 	// Pass password along to checkPassword-function
 	if (checkPassword(pwd)) {
 		showSecurePasswordMsg();
+
+		// Clear input field
+		inputPasswordEl.value = "";
 	} else {
 		showInsecurePasswordMsg();
 	}
 });
 
+// Listen for when the form is being reset
+formPasswordEl.addEventListener("reset", (e) => {
+	console.log("Things go 💥💣");
+});
+
+/*
 // Check password as the user types
 inputPasswordEl.addEventListener("keyup", () => {
 	// Get what password the user has typed
@@ -107,3 +119,4 @@ inputPasswordEl.addEventListener("keyup", () => {
 		showInsecurePasswordMsg();
 	}
 });
+*/
