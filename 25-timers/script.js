@@ -6,11 +6,19 @@
 const btnScareMe = document.querySelector('#btnScareMe');
 const ghostEl = document.querySelector('#ghost');
 
+// Get a random number between 1 and `max` (default 10)
+const getRandomNumber = (max = 10) => {
+	return Math.ceil( Math.random() * max );
+}
+
 btnScareMe.addEventListener("click", () => {
 	// hide button
 	btnScareMe.classList.add("hide");
 
-	console.log("Starting timer for scaring user 😈");
+	// get a random delay to wait before scaring the user
+	const delay = getRandomNumber() * 1000;
+
+	console.log(`Starting timer for ${delay} ms before scaring user 😈`);
 
 	// start timer
 	setTimeout(() => {
@@ -27,5 +35,5 @@ btnScareMe.addEventListener("click", () => {
 			btnScareMe.classList.remove("hide");  // show button again
 		}, 4000);
 
-	}, 5000);
+	}, delay);
 });
