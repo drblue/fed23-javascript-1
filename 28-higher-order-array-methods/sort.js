@@ -65,6 +65,7 @@ console.log("Names in reverse alphabetical order 🤩:", names);
 // console.log("Numbers in proper! order:", numbers);
 
 // We can even sort objects based on a property
+/*
 const students = [
 	{
 		name: "Johan",
@@ -87,8 +88,9 @@ const students = [
 		points: 35,
 	},
 ];
+*/
 
-console.log("students before sort:", students);
+// console.log("students before sort:", students);
 /*
 // Sort students by their points
 students.sort( (a, b) => {
@@ -109,6 +111,7 @@ students.sort( (a, b) => {
 console.log("students after sort:", students);
 */
 
+/*
 // Sort students by their name
 students.sort( (a, b) => {
 	if (a.name < b.name) {
@@ -116,6 +119,47 @@ students.sort( (a, b) => {
 	}
 
 	if (a.name > b.name) {
+		return 1;
+	}
+
+	return 0;
+} );
+
+console.log("students after sort:", students);
+*/
+
+const students = [
+	{
+		name: "johan",
+		points: -1337,
+	},
+	{
+		name: "Kim",
+		points: 3,
+	},
+	{
+		name: "alicia",
+		points: 42,
+	},
+	{
+		name: "Elliot",
+		points: 88,
+	},
+	{
+		name: "Maja",
+		points: 35,
+	},
+];
+
+console.log("students before sort:", students);
+
+// Sort students by their name, regardless of casing on the `name`-attribute
+students.sort( (a, b) => {
+	if (a.name.toLowerCase() < b.name.toLowerCase()) {
+		return -1;
+	}
+
+	if (a.name.toLowerCase() > b.name.toLowerCase()) {
 		return 1;
 	}
 
