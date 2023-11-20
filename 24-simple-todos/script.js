@@ -5,6 +5,7 @@
 // Get references to DOM elements
 const todolistEl = document.querySelector("#todolist");
 const formCreateTodoEl = document.querySelector("#formCreateTodo");
+const inputNewTodoTitleEl = document.querySelector("#inputNewTodoTitle");
 
 // List of todos
 const todos = [
