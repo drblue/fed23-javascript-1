@@ -43,24 +43,34 @@ const getRandomNumber = (max = 10) => {
 	return Math.ceil( Math.random() * max );
 }
 
+// Function for updating DOM with guesses made
+const updateGuesses = (nbrOfGuesses) => {
+	guessesEl.innerText = (nbrOfGuesses === 1)
+		? `${nbrOfGuesses} guess`
+		: `${nbrOfGuesses} guesses`;
+}
+
 // Variables to store game state in
 let correctNumber;
 let guesses;
 
-// Get a number to guess
-correctNumber = getRandomNumber();
+// Function for starting a new game
+const startGame = () => {
+	// Get a number to guess
+	correctNumber = getRandomNumber();
 
-// Reset number of guesses to 0
-guesses = 0;
+	// Reset number of guesses to 0
+	guesses = 0;
 
-// Update DOM with guesses made
-guessesEl.innerText = `${guesses} guesses`;
+	// Update DOM with guesses made
+	updateGuesses(guesses);
 
-// I'm going to cheat!
-cheatEl.innerText = correctNumber;
+	// I'm going to cheat!
+	cheatEl.innerText = correctNumber;
 
-// Focus on input field
-inputGuessEl.focus();
+	// Focus on input field
+	inputGuessEl.focus();
+}
 
 // Listen for guesses
 formGuessEl.addEventListener("submit", (e) => {
@@ -74,9 +84,7 @@ formGuessEl.addEventListener("submit", (e) => {
 	guesses++;
 
 	// Update DOM with guesses made
-	guessesEl.innerText = (guesses === 1)
-		? `${guesses} guess`
-		: `${guesses} guesses`;
+	updateGuesses(guesses);
 
 	// Check if guess was correct
 	if (guessedNumber === correctNumber) {
@@ -103,24 +111,15 @@ formGuessEl.addEventListener("submit", (e) => {
 
 // Listen for reset/"New game"
 formGuessEl.addEventListener("reset", () => {
-	// Get a number to guess
-	correctNumber = getRandomNumber();
-
-	// Reset number of guesses to 0
-	guesses = 0;
-
-	// Update DOM with guesses made
-	guessesEl.innerText = `${guesses} guesses`;
-
-	// I'm going to cheat!
-	cheatEl.innerText = correctNumber;
+	// Start a new game
+	startGame();
 
 	// Empty previous result
 	turnoutEl.innerText = "";
 
-	// Focus on input field
-	inputGuessEl.focus();
-
 	// Re-enable user guessing
 	btnGetLuckyEl.removeAttribute("disabled");
 });
+
+// Start a new game
+startGame();
