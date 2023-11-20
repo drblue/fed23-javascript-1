@@ -89,12 +89,12 @@ const students = [
 ];
 
 console.log("students before sort:", students);
-
+/*
+// Sort students by their points
 students.sort( (a, b) => {
 	// shorthand (only works if the attribute we compare is a **NUMBER**)
 	return (a.points - b.points);
 
-	/*
 	if (a.points < b.points) {
 		return -1;
 	}
@@ -104,7 +104,22 @@ students.sort( (a, b) => {
 	}
 
 	return 0;
-	*/
+} );
+
+console.log("students after sort:", students);
+*/
+
+// Sort students by their name
+students.sort( (a, b) => {
+	if (a.name < b.name) {
+		return -1;
+	}
+
+	if (a.name > b.name) {
+		return 1;
+	}
+
+	return 0;
 } );
 
 console.log("students after sort:", students);
