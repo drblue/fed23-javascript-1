@@ -59,6 +59,9 @@ guessesEl.innerText = `${guesses} guesses`;
 // I'm going to cheat!
 cheatEl.innerText = correctNumber;
 
+// Focus on input field
+inputGuessEl.focus();
+
 // Listen for guesses
 formGuessEl.addEventListener("submit", (e) => {
 	// Stop form from being sent to the server
@@ -88,6 +91,11 @@ formGuessEl.addEventListener("submit", (e) => {
 
 	}
 
+	// Empty previous guess
+	inputGuessEl.value = "";
+
+	// Focus on input field
+	inputGuessEl.focus();
 });
 
 // Listen for reset/"New game"
@@ -106,4 +114,7 @@ formGuessEl.addEventListener("reset", () => {
 
 	// Empty previous result
 	turnoutEl.innerText = "";
+
+	// Focus on input field
+	inputGuessEl.focus();
 });
