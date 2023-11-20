@@ -68,8 +68,12 @@ formGuessEl.addEventListener("submit", (e) => {
 	if (guessedNumber === correctNumber) {
 		// YAY
 		turnoutEl.innerText = `${guessedNumber} is correct! 🥳`;
-	} else {
-		// NEIN
-		turnoutEl.innerText = `${guessedNumber} is wrong! 😔`;
+
+	} else if (guessedNumber < correctNumber) {
+		turnoutEl.innerText = `${guessedNumber} is TOO LOW! 😔`;
+
+	} else if (guessedNumber > correctNumber) {
+		turnoutEl.innerText = `${guessedNumber} is TOO HIGH! 🤪`;
+
 	}
 });
