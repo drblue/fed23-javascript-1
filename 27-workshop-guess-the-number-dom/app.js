@@ -30,6 +30,46 @@
  *
  */
 
+// Get references to DOM Elements
+const cheatEl = document.querySelector('#cheat');
+const formGuessEl = document.querySelector('#formGuess');
+const inputGuessEl = document.querySelector('#inputGuess');
+const btnGetLuckyEl = formGuessEl.querySelector('button[type="submit"]');
+const guessesEl = document.querySelector('#guesses');
+const turnoutEl = document.querySelector('#turnout');
+
+// Get a random number between 1-10
 const getRandomNumber = (max = 10) => {
 	return Math.ceil( Math.random() * max );
 }
+
+// Variables to store game state in
+let correctNumber;
+let guesses;
+
+// Get a number to guess
+correctNumber = getRandomNumber();
+
+// Reset number of guesses to 0
+guesses = 0;
+
+// I'm going to cheat!
+cheatEl.innerText = correctNumber;
+
+// Listen for guesses
+formGuessEl.addEventListener("submit", (e) => {
+	// Stop form from being sent to the server
+	e.preventDefault();
+
+	// Get guessed number from input-field (and convert it to a Number)
+	const guessedNumber = Number(inputGuessEl.value);
+
+	// Check if guess was correct
+	if (guessedNumber === correctNumber) {
+		// YAY
+		turnoutEl.innerText = `${guessedNumber} is correct! 🥳`;
+	} else {
+		// NEIN
+		turnoutEl.innerText = `${guessedNumber} is wrong! 😔`;
+	}
+});
