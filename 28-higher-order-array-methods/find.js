@@ -36,6 +36,7 @@ const firstVeryLargeNumber = numbers.find(num => num >= 100);  // will return un
 console.log("First number >= 100 is:", firstVeryLargeNumber);
 */
 
+/*
 const students = [
 	{
 		name: "Johan",
@@ -62,3 +63,38 @@ const students = [
 // Find first student which are godkänd (>= 40)
 const firstPassedStudent = students.find(student => student.points >= 40);  // will return Alicia-object
 console.log("First passed student:", firstPassedStudent);
+*/
+
+const products = [
+	{
+		sku: "CORR-BWL",
+		name: "Corrosive bowl",
+		in_stock: 321,
+		price: 0.99,
+	},
+	{
+		sku: "CTN-SPCE",
+		name: "Cotton spice rack",
+		in_stock: 2,
+		price: 149.99,
+	},
+	{
+		sku: "GOOD-COOKIES",
+		name: "Inside-out Oreo cookies",
+		in_stock: 18,
+		price: 2.49,
+	},
+	{
+		sku: "BACK-BREAKER",
+		name: "The uncomfortable broom",
+		in_stock: 1,
+		price: 28.65,
+	},
+];
+
+const nomNomProduct = products.find(product => product.sku === "GOOD-COOKIES");
+if (nomNomProduct) {
+	console.log("YAY FOUND COOKIES!", nomNomProduct);
+} else {
+	console.log("SAD COOKIE MONSTER 🥺");
+}
