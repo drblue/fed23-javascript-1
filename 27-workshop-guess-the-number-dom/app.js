@@ -53,6 +53,9 @@ correctNumber = getRandomNumber();
 // Reset number of guesses to 0
 guesses = 0;
 
+// Update DOM with guesses made
+guessesEl.innerText = `${guesses} guesses`;
+
 // I'm going to cheat!
 cheatEl.innerText = correctNumber;
 
@@ -63,6 +66,12 @@ formGuessEl.addEventListener("submit", (e) => {
 
 	// Get guessed number from input-field (and convert it to a Number)
 	const guessedNumber = Number(inputGuessEl.value);
+
+	// Increase number of guesses made
+	guesses++;
+
+	// Update DOM with guesses made
+	guessesEl.innerText = `${guesses} guesses`;
 
 	// Check if guess was correct
 	if (guessedNumber === correctNumber) {
