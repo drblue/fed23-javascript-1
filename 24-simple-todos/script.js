@@ -156,21 +156,21 @@ const renderTodos = () => {
 	// Sort our todos before rendering them
 	sortTodos();
 
-	// Clear any existing listitems from the DOM
-	todolistEl.innerText = "";
+	// 😤 Clear any existing listitems from the DOM
+	// todolistEl.innerText = "";
 
-	// Loop over the todos-array and create a new
-	// listitem for each todoitem
-	todos.forEach((todo) => {
-		const cssCompleted = todo.completed ? "completed" : "";
-
-		todolistEl.innerHTML += `
-			<li class="list-group-item ${cssCompleted}">
-				<span class="todo-title">${todo.title}</span>
-				<button class="ms-1 btn btn-danger btn-sm">🚮</button>
-			</li>
-		`;
-	});
+	// Loop over the todos-array and add markup for a listitem
+	// to an array, and then once we've looped, THEN output
+	// the HTML to the DOM
+	todolistEl.innerHTML = todos
+		.map(todo => {
+			const cssCompleted = todo.completed ? "completed" : "";
+			return `<li class="list-group-item ${cssCompleted}">
+						<span class="todo-title">${todo.title}</span>
+						<button class="ms-1 btn btn-danger btn-sm">🚮</button>
+					</li>`;
+		})
+		.join("");
 }
 
 // Render the initial representation of the todos-array
