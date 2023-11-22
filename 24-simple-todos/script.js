@@ -25,7 +25,31 @@ const todos = [
 		title: "Take over the world",
 		completed: false,
 	},
+	{
+		title: "Find more memes",
+		completed: true,
+	},
 ];
+
+const sortTodos = () => {
+	// Sort todos by title
+	todos.sort((a, b) => {
+		// Support for international characters (well, almost, if you run Swedish as your browser locale)
+		return a.title.localeCompare(b.title, "sv");
+
+		/*
+		if (a.title.toLowerCase() < b.title.toLowerCase()) {
+			return -1;
+		}
+
+		if (a.title.toLowerCase() > b.title.toLowerCase()) {
+			return 1;
+		}
+
+		return 0;
+		*/
+	});
+}
 
 // Listen for submit-events on the form
 formCreateTodoEl.addEventListener("submit", (e) => {
@@ -60,6 +84,9 @@ formCreateTodoEl.addEventListener("submit", (e) => {
 
 // Render a representation of the todos-array to the DOM
 const renderTodos = () => {
+	// Sort our todos before rendering them
+	sortTodos();
+
 	// Clear any existing listitems from the DOM
 	todolistEl.innerText = "";
 
