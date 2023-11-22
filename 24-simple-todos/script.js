@@ -8,7 +8,7 @@ const formCreateTodoEl = document.querySelector("#formCreateTodo");
 const inputNewTodoTitleEl = document.querySelector("#inputNewTodoTitle");
 
 // List of todos
-const todos = [
+let todos = [
 	{
 		title: "Eat",
 		completed: false,
@@ -93,12 +93,18 @@ todolistEl.addEventListener("click", (e) => {
 		// Get the `.todo-title` elements innerText
 		const todoTitle = todoTitleEl.innerText;
 
+		/*
 		// Find index of todo in `todos` that has a matching title
 		const index = todos.findIndex(todo => todo.title === todoTitle);
 		// console.log("Found index of todo to remove by traversing a lot:", index);
 
 		// Remove todo from todos by splicing
 		todos.splice(index, 1);
+		*/
+
+		// Using filter to get all todos that are NOT matching the title of the
+		// todo we want to remove
+		todos = todos.filter(todo => todo.title !== todoTitle);
 
 		// Render updated todos
 		renderTodos();
@@ -118,6 +124,15 @@ formCreateTodoEl.addEventListener("submit", (e) => {
 	if (newTodoTitle === "") {
 		return;
 	}
+
+	// // Make sure we don't already have a todo with this title
+	// // If we do, bail
+	// // (we're not going to use this as we're going to learn about data-attributes)
+	// const todoWithSameTitle = todos.find(todo => todo.title === newTodoTitle);
+	// if (todoWithSameTitle) {
+	// 	alert("That todo already exists!");
+	// 	return;
+	// }
 
 	// Create a new todo-object
 	const newTodo = {
