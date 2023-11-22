@@ -73,9 +73,9 @@ todolistEl.addEventListener("click", (e) => {
 			return;
 		}
 
-		// Set completed to true on the found todo
-		clickedTodo.completed = true;
-		console.log("Changed clicked todo completed to true");
+		// Change (toggle) completed on the found todo
+		clickedTodo.completed = !clickedTodo.completed;
+		console.log("Toggled completed on the clicked todo");
 
 		// Render updated todos
 		renderTodos();
