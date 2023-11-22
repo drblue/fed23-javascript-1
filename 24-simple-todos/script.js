@@ -51,6 +51,37 @@ const sortTodos = () => {
 	});
 }
 
+// Listen for click-events on `#todolist` (the `<ul>`)
+todolistEl.addEventListener("click", (e) => {
+	// console.log("You clicked on either the whole list, or one of its children", e.target);
+
+	// Check if user clicked on a LI element
+	if (e.target.tagName === "LI") {
+		// console.log("YAY you clicked on a todo (LI)", e.target);
+		// console.log("The clicked todo's title is:", e.target.innerText);
+		const clickedTodoTitle = e.target.innerText;
+
+		// Search todos for the todo with the title `clickedTodoTitle`
+		const clickedTodo = todos.find(todo => {
+			return (todo.title === clickedTodoTitle);
+		});
+		console.log("Result from find:", clickedTodo);
+
+		// If no todo was found, bail
+		if (!clickedTodo) {
+			alert(`Could not find todo with title:`, clickedTodoTitle)
+			return;
+		}
+
+		// Set completed to true on the found todo
+		clickedTodo.completed = true;
+		console.log("Changed clicked todo completed to true");
+
+		// Render updated todos
+		renderTodos();
+	}
+});
+
 // Listen for submit-events on the form
 formCreateTodoEl.addEventListener("submit", (e) => {
 	// Stop form from being submitted to the server
