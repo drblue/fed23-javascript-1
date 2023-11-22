@@ -3,7 +3,7 @@
 	padding: 1rem;
 }
 
-.completed {
+.completed .todo-title {
 	font-style: italic;
 	text-decoration: line-through;
 }

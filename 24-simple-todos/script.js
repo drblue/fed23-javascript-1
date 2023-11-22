@@ -55,9 +55,8 @@ const sortTodos = () => {
 todolistEl.addEventListener("click", (e) => {
 	// console.log("You clicked on either the whole list, or one of its children", e.target);
 
-	// Check if user clicked on a LI element
-	if (e.target.tagName === "LI") {
-		// console.log("YAY you clicked on a todo (LI)", e.target);
+	if (e.target.tagName === "SPAN") {
+		// User clicked on a SPAN element
 		// console.log("The clicked todo's title is:", e.target.innerText);
 		const clickedTodoTitle = e.target.innerText;
 
@@ -65,17 +64,41 @@ todolistEl.addEventListener("click", (e) => {
 		const clickedTodo = todos.find(todo => {
 			return (todo.title === clickedTodoTitle);
 		});
-		console.log("Result from find:", clickedTodo);
+		// console.log("Result from find:", clickedTodo);
 
 		// If no todo was found, bail
 		if (!clickedTodo) {
-			alert(`Could not find todo with title:`, clickedTodoTitle)
+			console.log("Could not find todo with the clicked title:", clickedTodoTitle);
+			// alert("Could not find todo with the clicked title!");
 			return;
 		}
 
 		// Change (toggle) completed on the found todo
 		clickedTodo.completed = !clickedTodo.completed;
-		console.log("Toggled completed on the clicked todo");
+		// console.log("Toggled completed on the clicked todo");
+
+		// Render updated todos
+		renderTodos();
+
+	} else if (e.target.tagName === "BUTTON") {
+		// User clicked on a BUTTON element
+		// console.log("DELETE ALL THE THINGS!!!!!!!!!!!!", e.target);
+
+		// Get parent element (`<li>`) to the button
+		const parentLiEl = e.target.parentElement;
+
+		// From the parent elements POV, get the element with the class `.todo-title`
+		const todoTitleEl = parentLiEl.querySelector(".todo-title");
+
+		// Get the `.todo-title` elements innerText
+		const todoTitle = todoTitleEl.innerText;
+
+		// Find index of todo in `todos` that has a matching title
+		const index = todos.findIndex(todo => todo.title === todoTitle);
+		// console.log("Found index of todo to remove by traversing a lot:", index);
+
+		// Remove todo from todos by splicing
+		todos.splice(index, 1);
 
 		// Render updated todos
 		renderTodos();
@@ -124,27 +147,14 @@ const renderTodos = () => {
 	// Loop over the todos-array and create a new
 	// listitem for each todoitem
 	todos.forEach((todo) => {
-		/*
 		const cssCompleted = todo.completed ? "completed" : "";
 
 		todolistEl.innerHTML += `
 			<li class="list-group-item ${cssCompleted}">
-				${todo.title}
+				<span class="todo-title">${todo.title}</span>
+				<button class="ms-1 btn btn-danger btn-sm">🚮</button>
 			</li>
 		`;
-		*/
-
-		// create a new li element
-		const todoEl = document.createElement("li");
-		todoEl.innerText = todo.title;
-		todoEl.classList.add("list-group-item");
-
-		if (todo.completed) {
-			todoEl.classList.add("completed");
-		}
-
-		// append the new li element to the ul element
-		todolistEl.append(todoEl);
 	});
 }
 
