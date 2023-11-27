@@ -1,0 +1,9 @@
+#todolist {
+	background-color: brown;
+	padding: 1rem;
+}
+
+.completed .todo-title {
+	font-style: italic;
+	text-decoration: line-through;
+}
