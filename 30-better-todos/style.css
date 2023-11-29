@@ -3,6 +3,11 @@
 	padding: 1rem;
 }
 
+#completed-todolist {
+	background-color: green;
+	padding: 1rem;
+}
+
 .completed .todo-title {
 	font-style: italic;
 	text-decoration: line-through;

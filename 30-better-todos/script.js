@@ -4,7 +4,8 @@
  */
 
 // Get references to DOM elements
-const todolistEl = document.querySelector("#todolist");
+const todolistEl = document.querySelector("#todolist");  // incomplete todos
+const completedTodolistEl = document.querySelector("#completed-todolist");  // completed todos
 const formCreateTodoEl = document.querySelector("#formCreateTodo");
 const inputNewTodoTitleEl = document.querySelector("#inputNewTodoTitle");
 
@@ -35,64 +36,68 @@ const sortTodos = () => {
 	});
 }
 
-// Listen for click-events on `#todolist` (the `<ul>`)
-todolistEl.addEventListener("click", (e) => {
-	// console.log("You clicked on either the whole list, or one of its children", e.target);
+// Get all todos lists and listen for clicks
+document.querySelectorAll("ul.todos").forEach(listEl => {
 
-	if (e.target.tagName === "SPAN") {
-		// User clicked on a SPAN element
-		// console.log("The clicked todo's title is:", e.target.innerText);
-		const clickedTodoTitle = e.target.innerText;
+	// Listen for click-events on the list
+	listEl.addEventListener("click", (e) => {
+		// console.log("You clicked on either the whole list, or one of its children", e.target);
 
-		// Search todos for the todo with the title `clickedTodoTitle`
-		const clickedTodo = todos.find(todo => {
-			return (todo.title === clickedTodoTitle);
-		});
-		// console.log("Result from find:", clickedTodo);
+		if (e.target.tagName === "SPAN") {
+			// User clicked on a SPAN element
+			// console.log("The clicked todo's title is:", e.target.innerText);
+			const clickedTodoTitle = e.target.innerText;
 
-		// If no todo was found, bail
-		if (!clickedTodo) {
-			console.log("Could not find todo with the clicked title:", clickedTodoTitle);
-			// alert("Could not find todo with the clicked title!");
-			return;
+			// Search todos for the todo with the title `clickedTodoTitle`
+			const clickedTodo = todos.find(todo => {
+				return (todo.title === clickedTodoTitle);
+			});
+			// console.log("Result from find:", clickedTodo);
+
+			// If no todo was found, bail
+			if (!clickedTodo) {
+				console.log("Could not find todo with the clicked title:", clickedTodoTitle);
+				// alert("Could not find todo with the clicked title!");
+				return;
+			}
+
+			// Change (toggle) completed on the found todo
+			clickedTodo.completed = !clickedTodo.completed;
+			// console.log("Toggled completed on the clicked todo");
+
+			// Render updated todos
+			renderTodos();
+
+		} else if (e.target.tagName === "BUTTON") {
+			// User clicked on a BUTTON element
+			// console.log("DELETE ALL THE THINGS!!!!!!!!!!!!", e.target);
+
+			// Get parent element (`<li>`) to the button
+			const parentLiEl = e.target.parentElement;
+
+			// From the parent elements POV, get the element with the class `.todo-title`
+			const todoTitleEl = parentLiEl.querySelector(".todo-title");
+
+			// Get the `.todo-title` elements innerText
+			const todoTitle = todoTitleEl.innerText;
+
+			/*
+			// Find index of todo in `todos` that has a matching title
+			const index = todos.findIndex(todo => todo.title === todoTitle);
+			// console.log("Found index of todo to remove by traversing a lot:", index);
+
+			// Remove todo from todos by splicing
+			todos.splice(index, 1);
+			*/
+
+			// Using filter to get all todos that are NOT matching the title of the
+			// todo we want to remove
+			todos = todos.filter(todo => todo.title !== todoTitle);
+
+			// Render updated todos
+			renderTodos();
 		}
-
-		// Change (toggle) completed on the found todo
-		clickedTodo.completed = !clickedTodo.completed;
-		// console.log("Toggled completed on the clicked todo");
-
-		// Render updated todos
-		renderTodos();
-
-	} else if (e.target.tagName === "BUTTON") {
-		// User clicked on a BUTTON element
-		// console.log("DELETE ALL THE THINGS!!!!!!!!!!!!", e.target);
-
-		// Get parent element (`<li>`) to the button
-		const parentLiEl = e.target.parentElement;
-
-		// From the parent elements POV, get the element with the class `.todo-title`
-		const todoTitleEl = parentLiEl.querySelector(".todo-title");
-
-		// Get the `.todo-title` elements innerText
-		const todoTitle = todoTitleEl.innerText;
-
-		/*
-		// Find index of todo in `todos` that has a matching title
-		const index = todos.findIndex(todo => todo.title === todoTitle);
-		// console.log("Found index of todo to remove by traversing a lot:", index);
-
-		// Remove todo from todos by splicing
-		todos.splice(index, 1);
-		*/
-
-		// Using filter to get all todos that are NOT matching the title of the
-		// todo we want to remove
-		todos = todos.filter(todo => todo.title !== todoTitle);
-
-		// Render updated todos
-		renderTodos();
-	}
+	});
 });
 
 // Listen for submit-events on the form
@@ -143,10 +148,38 @@ const renderTodos = () => {
 	// 😤 Clear any existing listitems from the DOM
 	// todolistEl.innerText = "";
 
-	// Loop over the todos-array and add markup for a listitem
-	// to an array, and then once we've looped, THEN output
-	// the HTML to the DOM
-	todolistEl.innerHTML = todos
+	// Get all incomplete (röda) todos
+	const incompleteTodos = todos.filter((todo) => {
+		return !todo.completed;
+		// return (todo.completed === false);
+
+		/*
+		if (todo.completed === false) {
+			return true; // is röd
+		} else {
+			return false; // is grön
+		}
+		*/
+	});
+
+	// Get all completed (gröna) todos
+	const completedTodos = todos.filter((todo) => {
+		return todo.completed;
+	});
+
+	// Output (render) all incomplete (röda) todos
+	todolistEl.innerHTML = incompleteTodos
+		.map(todo => {
+			const cssCompleted = todo.completed ? "completed" : "";
+			return `<li class="list-group-item ${cssCompleted}">
+						<span class="todo-title">${todo.title}</span>
+						<button class="ms-1 btn btn-danger btn-sm">🚮</button>
+					</li>`;
+		})
+		.join("");
+
+	// Output (render) all completed (gröna) todos
+	completedTodolistEl.innerHTML = completedTodos
 		.map(todo => {
 			const cssCompleted = todo.completed ? "completed" : "";
 			return `<li class="list-group-item ${cssCompleted}">
