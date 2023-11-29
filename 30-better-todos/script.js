@@ -46,17 +46,20 @@ document.querySelectorAll("ul.todos").forEach(listEl => {
 		if (e.target.tagName === "SPAN") {
 			// User clicked on a SPAN element
 			// console.log("The clicked todo's title is:", e.target.innerText);
-			const clickedTodoTitle = e.target.innerText;
+
+			// get the `data-todo-id` attribute from the parent (LI) element
+			const parentLiEl = e.target.parentElement;
+			const clickedTodoId = Number(parentLiEl.dataset.todoId);  // convert to a number
 
 			// Search todos for the todo with the title `clickedTodoTitle`
 			const clickedTodo = todos.find(todo => {
-				return (todo.title === clickedTodoTitle);
+				return (todo.id === clickedTodoId);
 			});
 			// console.log("Result from find:", clickedTodo);
 
 			// If no todo was found, bail
 			if (!clickedTodo) {
-				console.log("Could not find todo with the clicked title:", clickedTodoTitle);
+				console.log("Could not find todo with the clicked id:", clickedTodoId);
 				// alert("Could not find todo with the clicked title!");
 				return;
 			}
@@ -75,24 +78,12 @@ document.querySelectorAll("ul.todos").forEach(listEl => {
 			// Get parent element (`<li>`) to the button
 			const parentLiEl = e.target.parentElement;
 
-			// From the parent elements POV, get the element with the class `.todo-title`
-			const todoTitleEl = parentLiEl.querySelector(".todo-title");
-
-			// Get the `.todo-title` elements innerText
-			const todoTitle = todoTitleEl.innerText;
-
-			/*
-			// Find index of todo in `todos` that has a matching title
-			const index = todos.findIndex(todo => todo.title === todoTitle);
-			// console.log("Found index of todo to remove by traversing a lot:", index);
-
-			// Remove todo from todos by splicing
-			todos.splice(index, 1);
-			*/
+			// Get the `data-todo-id` attribute from the parent
+			const clickedTodoId = Number(parentLiEl.dataset.todoId);
 
 			// Using filter to get all todos that are NOT matching the title of the
 			// todo we want to remove
-			todos = todos.filter(todo => todo.title !== todoTitle);
+			todos = todos.filter(todo => todo.id !== clickedTodoId);
 
 			// Render updated todos
 			renderTodos();
@@ -198,7 +189,7 @@ const renderTodos = () => {
 			return !todo.completed;
 		})  // returnerar en ny array med alla incomplete todos
 		.map(todo => {
-			return `<li class="list-group-item" data-id="${todo.id}">
+			return `<li class="list-group-item" data-todo-id="${todo.id}">
 						<span class="todo-title">${todo.title}</span>
 						<button class="ms-1 btn btn-danger btn-sm">🚮</button>
 					</li>`;
@@ -211,7 +202,7 @@ const renderTodos = () => {
 			return todo.completed;
 		})
 		.map(todo => {
-			return `<li class="list-group-item completed" data-id="${todo.id}">
+			return `<li class="list-group-item completed" data-todo-id="${todo.id}">
 						<span class="todo-title">${todo.title}</span>
 						<button class="ms-1 btn btn-danger btn-sm">🚮</button>
 					</li>`;
