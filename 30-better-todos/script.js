@@ -123,8 +123,33 @@ formCreateTodoEl.addEventListener("submit", (e) => {
 	// 	return;
 	// }
 
+	/*
+	// Find the highest ID for a todo
+	let maxIdForEach = 0;
+	todos.forEach(todo => {
+		if (todo.id > maxIdForEach) {
+			maxIdForEach = todo.id;
+		}
+	});
+
+	// Find the highest ID for a todo using map + Math.max
+	const allIds = todos.map(todo => {
+		return todo.id;
+	});
+	const maxIdMath = Math.max( ...allIds );  // Have to spread the array as Math.max can't receive an array
+	*/
+
+	// Find the highest ID for a todo using reduce
+	const maxId = todos.reduce((maxId, todo) => {
+		if (todo.id > maxId) {
+			return todo.id;
+		}
+		return maxId;
+	}, 0);
+
 	// Create a new todo-object
 	const newTodo = {
+		id: maxId + 1,
 		title: newTodoTitle,
 		completed: false,
 	}
