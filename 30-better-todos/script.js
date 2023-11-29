@@ -148,30 +148,32 @@ const renderTodos = () => {
 	// 😤 Clear any existing listitems from the DOM
 	// todolistEl.innerText = "";
 
-	// Get all incomplete (röda) todos
-	const incompleteTodos = todos.filter((todo) => {
-		return !todo.completed;
-		// return (todo.completed === false);
+	// // Get all incomplete (röda) todos
+	// const incompleteTodos = todos.filter((todo) => {
+	// 	return !todo.completed;
+	// 	// return (todo.completed === false);
 
-		/*
-		if (todo.completed === false) {
-			return true; // is röd
-		} else {
-			return false; // is grön
-		}
-		*/
-	});
+	// 	/*
+	// 	if (todo.completed === false) {
+	// 		return true; // is röd
+	// 	} else {
+	// 		return false; // is grön
+	// 	}
+	// 	*/
+	// });
 
-	// Get all completed (gröna) todos
-	const completedTodos = todos.filter((todo) => {
-		return todo.completed;
-	});
+	// // Get all completed (gröna) todos
+	// const completedTodos = todos.filter((todo) => {
+	// 	return todo.completed;
+	// });
 
 	// Output (render) all incomplete (röda) todos
-	todolistEl.innerHTML = incompleteTodos
+	todolistEl.innerHTML = todos
+		.filter(todo => {
+			return !todo.completed;
+		})  // returnerar en ny array med alla incomplete todos
 		.map(todo => {
-			const cssCompleted = todo.completed ? "completed" : "";
-			return `<li class="list-group-item ${cssCompleted}">
+			return `<li class="list-group-item">
 						<span class="todo-title">${todo.title}</span>
 						<button class="ms-1 btn btn-danger btn-sm">🚮</button>
 					</li>`;
@@ -179,10 +181,12 @@ const renderTodos = () => {
 		.join("");
 
 	// Output (render) all completed (gröna) todos
-	completedTodolistEl.innerHTML = completedTodos
+	completedTodolistEl.innerHTML = todos
+		.filter(todo => {
+			return todo.completed;
+		})
 		.map(todo => {
-			const cssCompleted = todo.completed ? "completed" : "";
-			return `<li class="list-group-item ${cssCompleted}">
+			return `<li class="list-group-item completed">
 						<span class="todo-title">${todo.title}</span>
 						<button class="ms-1 btn btn-danger btn-sm">🚮</button>
 					</li>`;
