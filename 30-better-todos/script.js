@@ -198,7 +198,7 @@ const renderTodos = () => {
 			return !todo.completed;
 		})  // returnerar en ny array med alla incomplete todos
 		.map(todo => {
-			return `<li class="list-group-item">
+			return `<li class="list-group-item" data-id="${todo.id}">
 						<span class="todo-title">${todo.title}</span>
 						<button class="ms-1 btn btn-danger btn-sm">🚮</button>
 					</li>`;
@@ -211,7 +211,7 @@ const renderTodos = () => {
 			return todo.completed;
 		})
 		.map(todo => {
-			return `<li class="list-group-item completed">
+			return `<li class="list-group-item completed" data-id="${todo.id}">
 						<span class="todo-title">${todo.title}</span>
 						<button class="ms-1 btn btn-danger btn-sm">🚮</button>
 					</li>`;
