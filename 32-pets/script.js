@@ -48,6 +48,7 @@ const getJSON = (url, callback) => {
 	console.log("Request sent to:", url);
 }
 
+/*
 getJSON("data/pets.json", (err, petCategories) => {
 	console.log("Pets request", err, petCategories);
 
@@ -61,6 +62,35 @@ getJSON("data/pets.json", (err, petCategories) => {
 			document.querySelector("#" + petCategory.id).innerHTML = pets
 				.map(pet => `<li>${pet.name}</li>`)
 				.join("");
+		});
+	});
+});
+*/
+
+// Get cattos 🐱
+getJSON('data/cats.json', (err, cats) => {
+	// Got cats!
+	console.log("Got list of cats:", cats);
+
+	// Get doggos 🐶
+	getJSON('data/dogs.json', (err, dogs) => {
+		// Got woofs!
+		console.log("Got list of dogs:", dogs);
+
+		// Get flying projectiles 🦜🚀
+		getJSON('data/birds.json', (err, birds) => {
+			// Got birds!
+			console.log("Got list of birds", birds);
+
+		});
+	});
+});
+
+// Callback Hell (a.k.a. JavaScript Triangle of Doom)
+getJSON('data/cats.json', (err, cats) => {
+	getJSON('data/dogs.json', (err, dogs) => {
+		getJSON('data/birds.json', (err, birds) => {
+			console.log("😰");
 		});
 	});
 });
