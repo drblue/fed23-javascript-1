@@ -1,6 +1,9 @@
 /**
  * XMLHttpRequest
  *
+ * MINI-WORKSHOP: Skriv funktionen `getJSON` som kan hämta vilken URL som helst
+ * och ÄNDÅ ta emot en callback som får två parametrar där den första är om något
+ * går fel och den andra är datan från om requesten lyckas.
  */
 
 // Get all users
