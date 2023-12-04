@@ -58,20 +58,20 @@ getJSON("https://jsonplaceholder.typicode.com/users", (err, data) => {
 	document.querySelector("#users").innerHTML = data
 		.map(user => `<li>${user.name}</li>`)
 		.join("");
-} );
 
-// Get posts plz
-getJSON("https://jsonplaceholder.typicode.com/posts", (err, data) => {
-	if (err) {
-		// Something went wrong 😢
-		alert(err);
-		return;
-	}
+	// THEN get the posts
+	getJSON("https://jsonplaceholder.typicode.com/posts", (err, data) => {
+		if (err) {
+			// Something went wrong 😢
+			alert(err);
+			return;
+		}
 
-	// Output all posts
-	document.querySelector("#posts").innerHTML = data
-		.map(post => `<li>${post.title}</li>`)
-		.join("");
+		// Output all posts
+		document.querySelector("#posts").innerHTML = data
+			.map(post => `<li>${post.title}</li>`)
+			.join("");
+	} );
 } );
 
 console.log("All requests sent!");
