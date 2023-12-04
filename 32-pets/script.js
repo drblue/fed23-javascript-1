@@ -1,6 +1,17 @@
 /**
  * Pets
  *
+ * MINI-WORKSHOP
+ *
+ * STEG 1
+ * Hämta `data/pets.json` och därefter för varje objekt i svaret
+ * så hämta den URL som finns i objektet. Skriv ut svaret till console.
+ *
+ * STEG 2
+ * Ändra koden från steg 1 så att du skriver ut informationen om varje
+ * husdjur till varsin egen UL i DOM (det finns redan UL-element) för
+ * de olika kategorierna av husdjur.
+ *
  */
 
 // Get data from a URL
