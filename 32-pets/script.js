@@ -48,6 +48,19 @@ const getJSON = (url, callback) => {
 	console.log("Request sent to:", url);
 }
 
-getJSON("data/pets.json", (err, data) => {
-	console.log("Pets request", err, data);
+getJSON("data/pets.json", (err, petCategories) => {
+	console.log("Pets request", err, petCategories);
+
+	// Make a request for each URL in petCategory
+	petCategories.forEach((petCategory) => {
+		console.log("Got a pet category:", petCategory);
+
+		getJSON(petCategory.url, (err, pets) => {
+			console.log("Got me sum pets:", petCategory, pets);
+
+			document.querySelector("#" + petCategory.id).innerHTML = pets
+				.map(pet => `<li>${pet.name}</li>`)
+				.join("");
+		});
+	});
 });

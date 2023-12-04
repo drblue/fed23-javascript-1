@@ -1,10 +1,14 @@
 [
 	{
-		"id": "Cats",
+		"id": "cats",
 		"url": "data/cats.json"
 	},
 	{
-		"id": "Dogs",
+		"id": "dogs",
 		"url": "data/dogs.json"
+	},
+	{
+		"id": "birds",
+		"url": "data/birds.json"
 	}
 ]
