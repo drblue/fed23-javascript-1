@@ -6,13 +6,13 @@
  * går fel och den andra är datan från om requesten lyckas.
  */
 
-// Get all users
-const getUsers = (callback) => {
+// Get data from a URL
+const getJSON = (url, callback) => {
 	// Create a new XML Http Request
 	const request = new XMLHttpRequest();
 
-	// Set request to GET data from "https://jsonplaceholder.typicode.com/users"
-	request.open("GET", "https://jsonplaceholder.typicode.com/users");
+	// Set request to GET data from any URL
+	request.open("GET", url);
 
 	// Attach an event-listener to the request
 	request.addEventListener("readystatechange", () => {
@@ -47,20 +47,30 @@ const getUsers = (callback) => {
 }
 
 // Get users plz
-getUsers( (err, data) => {
-	console.log("Hello from the callback! Going to output to DOM");
-	// console.log("err:", err);
-	// console.log("data:", data);
-
+getJSON("https://jsonplaceholder.typicode.com/users", (err, data) => {
 	if (err) {
 		// Something went wrong 😢
 		alert(err);
 		return;
 	}
 
-	// Output all usres
+	// Output all users
 	document.querySelector("#users").innerHTML = data
 		.map(user => `<li>${user.name}</li>`)
+		.join("");
+} );
+
+// Get posts plz
+getJSON("https://jsonplaceholder.typicode.com/posts", (err, data) => {
+	if (err) {
+		// Something went wrong 😢
+		alert(err);
+		return;
+	}
+
+	// Output all posts
+	document.querySelector("#posts").innerHTML = data
+		.map(post => `<li>${post.title}</li>`)
 		.join("");
 } );
 
