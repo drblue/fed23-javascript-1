@@ -1,10 +1,8 @@
 /**
  * Fetch 🐶
  *
- * Gets `cats.json` and `dogs.json` in parallel
+ * Get `cats.json` and THEN get `dogs.json`
  */
-
-console.log("starting...");
 
 fetch("data/cats.json")
 	.then(res => {
@@ -20,13 +18,9 @@ fetch("data/cats.json")
 	})
 	.then(data => {
 		console.log("data:", data);
-	})
-	.catch(err => {
-		console.log("Nope, something went wrong:", err);
-		// alert("Sorry, something went terribly wrong. Please try again never.");
-	});
 
-fetch("data/dogs.json")
+		return fetch("data/dogs.json");
+	})
 	.then(res => {
 		console.log("response:", res);
 
