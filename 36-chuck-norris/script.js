@@ -5,21 +5,14 @@
  * <https://api.chucknorris.io/jokes/random>
  */
 
-const getJoke = () => {
-	fetch("https://api.chucknorris.io/jokes/random")
-		.then(response => {
-			if (!response.ok) {
-				throw new Error("Chuck Norris is unavailable to take you call right now");
-			}
+const getJoke = async () => {
+	const response = await fetch("https://api.chucknorris.io/jokes/random");
+	if (!response.ok) {
+		throw new Error("Chuck Norris is unavailable to take you call right now");
+	}
 
-			return response.json();
-		})
-		.then(joke => {
-			document.querySelector("#joke").innerText = joke.value;
-		})
-		.catch(() => {
-			document.querySelector("#joke").innerText = "ERROR: You don't summon Chuck Norris, Chuck Norris summons you";
-		});
+	const joke = await response.json();
+	document.querySelector("#joke").innerText = joke.value;
 }
 
 // Listen for when Chuck Norris is summoned
