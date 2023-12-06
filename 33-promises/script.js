@@ -60,10 +60,67 @@ const getJSON = (url) => {
 
 }
 
+/*
 getJSON("https://cataas.com/cat?json=true")
 	.then(cat => {
 		console.log(cat);
 	})
 	.catch(err => {
 		console.log(err);
+	});
+*/
+
+/*
+// Get all data in parallel
+getJSON("data/cats.json")
+	.then(cats => {
+		console.log("Got mjaus:", cats);
+	});
+
+getJSON("data/dogs.json")
+	.then(dogs => {
+		console.log("Got wooffs:", dogs);
+	});
+
+getJSON("data/birds.json")
+	.then(birds => {
+		console.log("Got flying things:", birds);
+	});
+*/
+
+/*
+// Get all data in serie
+getJSON("data/cats.json")
+	.then(cats => {
+		console.log("Got mjaus:", cats);
+
+		return getJSON("data/dogs.json");
+	})
+	.then(dogs => {
+		console.log("Got wooffs:", dogs);
+
+		return getJSON("data/birds.json");
+	})
+	.then(birds => {
+		console.log("Got flying things:", birds);
+	})
+	.catch(err => {
+		console.error("Something went wrong:", err);
+	});
+*/
+
+getJSON("data/pets.json")
+	.then(petCategories => {
+		petCategories.forEach(petCategory => {
+			getJSON(petCategory.url)
+				.then(pets => {
+					console.log("Get pets:", pets);
+
+				}).catch(err => {
+					console.error("Something went wrong:", err);
+				});
+		});
+	})
+	.catch(err => {
+		console.error("Something went wrong:", err);
 	});
