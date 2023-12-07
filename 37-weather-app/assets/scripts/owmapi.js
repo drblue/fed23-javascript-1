@@ -7,8 +7,6 @@
 const API_KEY = "7d07164c415624a8f477cd253d231922";
 const BASE_URL = "https://api.openweathermap.org/data/2.5";
 
-const weatherConditions = [];
-
 /**
  * Get current weather for city from OpenWeatherMap API
  * @param {string} city
@@ -28,5 +26,3 @@ const getCurrentWeather = async (city) => {
 	// return current weather conditions
 	return data;
 }
-
-getCurrentWeather("Malmo");
