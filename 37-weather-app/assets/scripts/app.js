@@ -3,24 +3,24 @@
  *
  */
 
-const renderCurrentWeather = (data) => {
+const renderCurrentWeather = (conditions) => {
 	document.querySelector("#forecast").innerHTML = `
 		<img src="assets/images/forecast-banner.png" class="card-img-top">
 		<div class="card-body">
 			<h5 class="card-title" id="location">
-				<span id="city">City</span>,
-				<span id="country">Country</span>
+				<span id="city">${conditions.name}</span>,
+				<span id="country">${conditions.sys.country}</span>
 			</h5>
 			<p class="temp">
-				<span id="temperature">300</span>
+				<span id="temperature">${conditions.main.temp}</span>
 				&deg;C
 			</p>
 			<p class="humidity">
-				<span id="humidity">100</span>
+				<span id="humidity">${conditions.main.humidity}</span>
 				&percnt; humidity
 			</p>
 			<p class="wind">
-				<span id="windspeed">1337</span>
+				<span id="windspeed">${conditions.wind.speed}</span>
 				m/s
 			</p>
 		</div>
