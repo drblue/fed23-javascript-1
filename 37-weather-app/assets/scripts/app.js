@@ -3,8 +3,10 @@
  *
  */
 
+const forecastEl = document.querySelector("#forecast");
+
 const renderCurrentWeather = (conditions) => {
-	document.querySelector("#forecast").innerHTML = `
+	forecastEl.innerHTML = `
 		<img src="assets/images/forecast-banner.png" class="card-img-top">
 		<div class="card-body">
 			<h5 class="card-title" id="location">
@@ -31,6 +33,9 @@ const renderCurrentWeather = (conditions) => {
 document.querySelector("#search-form").addEventListener("submit", async (e) => {
 	e.preventDefault();
 
+	// Hide any previous current weather conditions
+	forecastEl.classList.add("hide");
+
 	// Get value from input-field
 	// document.querySelector("#query").value;
 	const city = e.target.query.value.trim();
@@ -46,6 +51,7 @@ document.querySelector("#search-form").addEventListener("submit", async (e) => {
 	const data = await getCurrentWeather(city);
 	console.log(`Current weather conditions in "${city}":`, data);
 
-	// render current weather conditions
+	// render (and then show) current weather conditions
 	renderCurrentWeather(data);
+	forecastEl.classList.remove("hide");
 });
