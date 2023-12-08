@@ -15,6 +15,7 @@ const renderErrorNotice = msg => renderNotice(msg, "danger");
 const renderInfoNotice = msg => renderNotice(msg, "info");
 const renderWarningNotice = msg => renderNotice(msg, "warning");
 
+// Render current weather conditions
 const renderCurrentWeather = (conditions) => {
 	forecastEl.innerHTML = `
 		<img src="assets/images/forecast-banner.png" class="card-img-top">
@@ -48,7 +49,6 @@ document.querySelector("#search-form").addEventListener("submit", async (e) => {
 	alertEl.className = "hide";
 
 	// Get value from input-field
-	// document.querySelector("#query").value;
 	const city = e.target.query.value.trim();
 
 	// Make sure input is at least somewhat valid
@@ -58,14 +58,13 @@ document.querySelector("#search-form").addEventListener("submit", async (e) => {
 	}
 
 	// Get weather for city
-	console.log(`Searching for city "${city}"`);
 	try {
 		const data = await getCurrentWeather(city);
-		console.log(`Current weather conditions in "${city}":`, data);
 
 		// render (and then show) current weather conditions
 		renderCurrentWeather(data);
 		forecastEl.classList.remove("hide");
+
 	} catch (err) {
 		// Something went wrong!
 		renderErrorNotice(err);
