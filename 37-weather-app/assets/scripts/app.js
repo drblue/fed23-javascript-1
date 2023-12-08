@@ -5,6 +5,7 @@
 
 const alertEl = document.querySelector("#alert");
 const forecastEl = document.querySelector("#forecast");
+const spinnerEl = document.querySelector("#spinner");
 
 const renderNotice = (msg, severity = "info") => {
 	alertEl.innerText = msg;
@@ -48,6 +49,7 @@ document.querySelector("#search-form").addEventListener("submit", async (e) => {
 	forecastEl.classList.add("hide");
 	alertEl.className = "hide";
 
+
 	// Get value from input-field
 	const city = e.target.query.value.trim();
 
@@ -57,8 +59,11 @@ document.querySelector("#search-form").addEventListener("submit", async (e) => {
 		return;
 	}
 
-	// Get weather for city
 	try {
+		// Show loading spinner
+		spinnerEl.classList.remove("hide");
+
+		// Get weather for city
 		const data = await getCurrentWeather(city);
 
 		// render (and then show) current weather conditions
@@ -68,5 +73,9 @@ document.querySelector("#search-form").addEventListener("submit", async (e) => {
 	} catch (err) {
 		// Something went wrong!
 		renderErrorNotice(err);
+
 	}
+
+	// hide loading spinner
+	spinnerEl.classList.add("hide");
 });
