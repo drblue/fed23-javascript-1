@@ -21,8 +21,22 @@ const renderCurrentWeather = (conditions) => {
 	const icons = conditions.weather.map(condition =>
 		`<li><img src="http://openweathermap.org/img/wn/${condition.icon}@2x.png" alt="${condition.main}" title="${condition.description}"></li>`);
 
+	// determine if it's daytime or nighttime
+	const banner = (conditions.dt > conditions.sys.sunrise && conditions.dt < conditions.sys.sunset)
+		? "assets/images/day.svg"
+		: "assets/images/night.svg";
+
+	/*
+	// same as above, but not as pretty 😅
+	let banner = "assets/images/night.svg";  // assume it's nighttime as default
+	if (conditions.dt > conditions.sys.sunrise && conditions.dt < conditions.sys.sunset) {
+		// oops, it was daytime
+		banner = "assets/images/day.svg";
+	}
+	*/
+
 	forecastEl.innerHTML = `
-		<img src="assets/images/forecast-banner.png" class="card-img-top">
+		<img src="${banner}" class="card-img-top">
 		<div class="card-body">
 			<h5 class="card-title" id="location">
 				<span id="city">${conditions.name}</span>,
