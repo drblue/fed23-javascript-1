@@ -3,6 +3,7 @@
  *
  */
 
+const alertEl = document.querySelector("#alert");
 const forecastEl = document.querySelector("#forecast");
 
 const renderCurrentWeather = (conditions) => {
@@ -33,8 +34,9 @@ const renderCurrentWeather = (conditions) => {
 document.querySelector("#search-form").addEventListener("submit", async (e) => {
 	e.preventDefault();
 
-	// Hide any previous current weather conditions
+	// Hide any previous current weather conditions and errors
 	forecastEl.classList.add("hide");
+	alertEl.className = "hide";
 
 	// Get value from input-field
 	// document.querySelector("#query").value;
@@ -42,16 +44,24 @@ document.querySelector("#search-form").addEventListener("submit", async (e) => {
 
 	// Make sure input is at least somewhat valid
 	if (city.length < 3) {
-		alert("Please enter at least 3 chars");
+		// alert("Please enter at least 3 chars");
+		alertEl.innerText = "Please enter at least 3 chars";
+		alertEl.className = "alert alert-info";
 		return;
 	}
 
 	// Get weather for city
 	console.log(`Searching for city "${city}"`);
-	const data = await getCurrentWeather(city);
-	console.log(`Current weather conditions in "${city}":`, data);
+	try {
+		const data = await getCurrentWeather(city);
+		console.log(`Current weather conditions in "${city}":`, data);
 
-	// render (and then show) current weather conditions
-	renderCurrentWeather(data);
-	forecastEl.classList.remove("hide");
+		// render (and then show) current weather conditions
+		renderCurrentWeather(data);
+		forecastEl.classList.remove("hide");
+	} catch (err) {
+		// Something went wrong!
+		alertEl.innerText = err;
+		alertEl.className = "alert alert-danger";
+	}
 });
