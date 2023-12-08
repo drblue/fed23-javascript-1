@@ -18,6 +18,9 @@ const renderWarningNotice = msg => renderNotice(msg, "warning");
 
 // Render current weather conditions
 const renderCurrentWeather = (conditions) => {
+	const icons = conditions.weather.map(condition =>
+		`<li><img src="http://openweathermap.org/img/wn/${condition.icon}@2x.png" alt="${condition.main}" title="${condition.description}"></li>`);
+
 	forecastEl.innerHTML = `
 		<img src="assets/images/forecast-banner.png" class="card-img-top">
 		<div class="card-body">
@@ -37,6 +40,9 @@ const renderCurrentWeather = (conditions) => {
 				<span id="windspeed">${conditions.wind.speed}</span>
 				m/s
 			</p>
+			<ul class="conditions">
+				${icons.join("")}
+			</ul>
 		</div>
 	`;
 }
@@ -48,7 +54,6 @@ document.querySelector("#search-form").addEventListener("submit", async (e) => {
 	// Hide any previous current weather conditions and errors
 	forecastEl.classList.add("hide");
 	alertEl.className = "hide";
-
 
 	// Get value from input-field
 	const city = e.target.query.value.trim();
