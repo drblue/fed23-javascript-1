@@ -6,6 +6,21 @@
 const alertEl = document.querySelector("#alert");
 const forecastEl = document.querySelector("#forecast");
 
+const renderErrorNotice = (msg) => {
+	alertEl.innerText = msg;
+	alertEl.className = "alert alert-danger";
+}
+
+const renderInfoNotice = (msg) => {
+	alertEl.innerText = msg;
+	alertEl.className = "alert alert-info";
+}
+
+const renderWarningNotice = (msg) => {
+	alertEl.innerText = msg;
+	alertEl.className = "alert alert-warning";
+}
+
 const renderCurrentWeather = (conditions) => {
 	forecastEl.innerHTML = `
 		<img src="assets/images/forecast-banner.png" class="card-img-top">
@@ -44,9 +59,7 @@ document.querySelector("#search-form").addEventListener("submit", async (e) => {
 
 	// Make sure input is at least somewhat valid
 	if (city.length < 3) {
-		// alert("Please enter at least 3 chars");
-		alertEl.innerText = "Please enter at least 3 chars";
-		alertEl.className = "alert alert-info";
+		renderInfoNotice("Please enter at least 3 chars");
 		return;
 	}
 
@@ -61,7 +74,6 @@ document.querySelector("#search-form").addEventListener("submit", async (e) => {
 		forecastEl.classList.remove("hide");
 	} catch (err) {
 		// Something went wrong!
-		alertEl.innerText = err;
-		alertEl.className = "alert alert-danger";
+		renderErrorNotice(err);
 	}
 });
