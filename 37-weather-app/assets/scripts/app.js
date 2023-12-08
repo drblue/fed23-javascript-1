@@ -6,20 +6,14 @@
 const alertEl = document.querySelector("#alert");
 const forecastEl = document.querySelector("#forecast");
 
-const renderErrorNotice = (msg) => {
+const renderNotice = (msg, severity = "info") => {
 	alertEl.innerText = msg;
-	alertEl.className = "alert alert-danger";
+	alertEl.className = `alert alert-${severity}`;
 }
 
-const renderInfoNotice = (msg) => {
-	alertEl.innerText = msg;
-	alertEl.className = "alert alert-info";
-}
-
-const renderWarningNotice = (msg) => {
-	alertEl.innerText = msg;
-	alertEl.className = "alert alert-warning";
-}
+const renderErrorNotice = msg => renderNotice(msg, "danger");
+const renderInfoNotice = msg => renderNotice(msg, "info");
+const renderWarningNotice = msg => renderNotice(msg, "warning");
 
 const renderCurrentWeather = (conditions) => {
 	forecastEl.innerHTML = `
