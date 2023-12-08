@@ -35,6 +35,9 @@ const renderCurrentWeather = (conditions) => {
 	}
 	*/
 
+	// Get weather condition freshness
+	const freshness = new Date(conditions.dt * 1000);
+
 	forecastEl.innerHTML = `
 		<img src="${banner}" class="card-img-top">
 		<div class="card-body">
@@ -57,6 +60,8 @@ const renderCurrentWeather = (conditions) => {
 			<ul class="conditions">
 				${icons.join("")}
 			</ul>
+
+			<p class="text-muted small">${freshness.toLocaleString("sv-SE")}</p>
 		</div>
 	`;
 }
