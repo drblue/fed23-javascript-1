@@ -1,0 +1,17 @@
+/*
+#todolist {
+	background-color: brown;
+	padding: 1rem;
+}
+
+#completed-todolist {
+	background-color: green;
+	padding: 1rem;
+}
+*/
+
+.completed .todo-title {
+	color: var(--bs-gray-500);
+	font-style: italic;
+	text-decoration: line-through;
+}
