@@ -13,7 +13,7 @@
     {
       "id": 3,
       "title": "Master async JavaScript",
-      "completed": false
+      "completed": true
     },
     {
       "id": 4,
@@ -24,11 +24,6 @@
       "title": "Find moar memes",
       "completed": false,
       "id": 5
-    },
-    {
-      "title": "Find moar memes",
-      "completed": false,
-      "id": 6
     },
     {
       "title": "Find EVEN MOAR memes!!!!!!!!!!!!!!!",

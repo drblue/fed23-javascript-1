@@ -55,8 +55,24 @@ document.querySelectorAll("ul.todos").forEach(listEl => {
 			// Change (toggle) completed on the found todo
 			clickedTodo.completed = !clickedTodo.completed;
 
-			// Render updated todos
-			renderTodos();
+			// Send updated todo to the API
+			const patchResponse = await fetch("http://localhost:3001/todos/" + clickedTodoId, {
+				method: "PATCH",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(clickedTodo),
+			});
+
+			// Was patch successful?
+			if (!patchResponse.ok) {
+				alert("Could not patch todo. Maybe someone deleted it? Try reloading the page or check the server");
+				console.log("Failed to patch todo. Response was:", patchResponse);
+				return;
+			}
+
+			// Get the updated list of todos from the API
+			getTodos();
 
 		} else if (e.target.tagName === "BUTTON") {
 			// Delete todo
