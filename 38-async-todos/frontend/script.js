@@ -1,6 +1,11 @@
 /**
  * Async Todos
  *
+ * 1. Skriv funktionen `fetchTodos()` som gör en GET till `http://localhost:3001/todos`,
+ *    översätter från JSON till JavaScript-array och returnerar den.
+ *
+ * 2. Skriv funktionen `getTodos()` som kallar på `fetchTodos()`, väntar på den och tar
+ *    datan och skriver över `todos`. Därefter kallar den på `renderTodos()`.
  */
 
 // Get references to DOM elements
@@ -10,18 +15,7 @@ const formCreateTodoEl = document.querySelector("#formCreateTodo");
 const inputNewTodoTitleEl = document.querySelector("#inputNewTodoTitle");
 
 // List of todos
-let todos = [
-	{
-		id: 1,
-		title: "Add boilerplate code for Async Todos",
-		completed: true,
-	},
-	{
-		id: 2,
-		title: "Learn to write better placeholder text",
-		completed: false,
-	}
-];
+let todos = [];
 
 const sortTodos = () => {
 	// Sort todos by title
