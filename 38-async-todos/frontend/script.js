@@ -6,6 +6,10 @@
  *
  * 2. Skriv funktionen `getTodos()` som kallar på `fetchTodos()`, väntar på den och tar
  *    datan och skriver över `todos`. Därefter kallar den på `renderTodos()`.
+ *
+ * 3. Ändra i click-handlern så att när man klickar på en knapp så skickas det en
+ *    DELETE-request till `http://localhost:3001/todos/<id>`, väntar på svaret och
+ *    därefter (om den lyckades) kallar på `getTodos()`.
  */
 
 // Get references to DOM elements
@@ -74,7 +78,7 @@ document.querySelectorAll("ul.todos").forEach(listEl => {
 });
 
 // Listen for submit-events on the form
-formCreateTodoEl.addEventListener("submit", (e) => {
+formCreateTodoEl.addEventListener("submit", async (e) => {
 	// Stop form from being submitted to the server
 	// and causing a page reload
 	e.preventDefault();
@@ -87,27 +91,35 @@ formCreateTodoEl.addEventListener("submit", (e) => {
 		return;
 	}
 
-	// Find the highest ID for a todo using reduce
-	const maxId = todos.reduce((maxId, todo) => {
-		if (todo.id > maxId) {
-			return todo.id;
-		}
-		return maxId;
-	}, 0);
-
 	// Create a new todo-object
 	const newTodo = {
-		id: maxId + 1,
 		title: newTodoTitle,
 		completed: false,
 	}
+	console.log("Will send newTodo to API:", newTodo);
 
-	// Add it to the todos-array
-	todos.push(newTodo);
+	// POST todo to the API
+	const res = await fetch("http://localhost:3001/todos", {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(newTodo),
+	});
 
-	// Render a representation of the
-	// updated todos-array
-	renderTodos();
+	// Check that everything went ok
+	if (!res.ok) {
+		alert("Could not create todo! 🥺");
+		console.log("Could not create todo:", res);
+		return;
+	}
+
+	// Get response-body
+	const data = await res.json();
+	console.log("Gots data back:", data);
+
+	// Get the updated list of todos from the API
+	getTodos();
 
 	// Finally, clear the input-field
 	inputNewTodoTitleEl.value = "";
