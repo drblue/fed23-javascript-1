@@ -33,7 +33,7 @@ const sortTodos = () => {
 document.querySelectorAll("ul.todos").forEach(listEl => {
 
 	// Listen for click-events on the list
-	listEl.addEventListener("click", (e) => {
+	listEl.addEventListener("click", async (e) => {
 		if (e.target.tagName === "SPAN") {
 			// Toggle todo
 
@@ -67,12 +67,20 @@ document.querySelectorAll("ul.todos").forEach(listEl => {
 			// Get the `data-todo-id` attribute from the parent
 			const clickedTodoId = Number(parentLiEl.dataset.todoId);
 
-			// Using filter to get all todos that are NOT matching the title of the
-			// todo we want to remove
-			todos = todos.filter(todo => todo.id !== clickedTodoId);
+			// Send DELETE-request to API for this todo
+			const deleteResponse = await fetch("http://localhost:3001/todos/" + clickedTodoId, {
+				method: "DELETE",
+			});
 
-			// Render updated todos
-			renderTodos();
+			// Was delete successful?
+			if (!deleteResponse.ok) {
+				alert("Could not delete todo. Maybe someone else already deleted it? Try reloading the page or check the server");
+				console.log("Failed to delete todo. Response was:", deleteResponse);
+				return;
+			}
+
+			// Get the updated list of todos from the API
+			getTodos();
 		}
 	});
 });
