@@ -145,5 +145,29 @@ const renderTodos = () => {
 		.join("");
 }
 
+// Fetch todos from the API and return them
+const fetchTodos = async () => {
+	const res = await fetch("http://localhost:3001/todos");
+	if (!res.ok) {
+		throw new Error(`${res.status} ${res.statusText}`);  // "404 Not Found"
+	}
+
+	const data = await res.json();
+
+	return data;
+}
+
+// Get todos, replace existing todos and then render the todos
+const getTodos = async () => {
+	// Fetch todos from API
+	const data = await fetchTodos();
+
+	// Replace existing todos-array with the todos from the API
+	todos = data;
+
+	// Render the todos
+	renderTodos();
+}
+
 // Render the initial representation of the todos-array
-renderTodos();
+getTodos();
