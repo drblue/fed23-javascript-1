@@ -143,3 +143,21 @@ todos.forEach(item => {
 /**
  * TypeScript and DOM
  */
+
+const paragraphEl = document.querySelector<HTMLParagraphElement>(".content");  // HTMLParagraphElement | null
+//          ^?
+const paragraphEl2 = document.querySelector<HTMLParagraphElement>(".content")!;  // 🚨⛔️🛑🚓 HTMLParagraphElement
+//             ^?
+
+// const imgEl = document.querySelector(".img-fluid");  // 👎🏻 Element | null
+const imgEl = document.querySelector<HTMLImageElement>(".img-fluid");  // 👍🏻 HTMLImageElement | null
+
+const imgEl2: HTMLImageElement | null = document.querySelector(".img-fluid");  // 😒
+
+// 🤩
+if (imgEl) {
+	imgEl.src = "/js-vs-ts.png";
+}
+
+// const text = paragraphEl.
+// console.log(text);
