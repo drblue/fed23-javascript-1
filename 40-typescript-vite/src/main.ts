@@ -80,7 +80,7 @@ ages.forEach(age => {
 /**
  * Type Aliases
  */
-
+/*
 type strang = string;
 
 let username: strang;
@@ -95,11 +95,12 @@ type StrangEllerTal = string | number;
 let x: StrangEllerTal = "42";
 x = 42;
 x = "lol";
+*/
 
 /**
  * Interfaces
  */
-
+/*
 interface Todo {
 	id: number
 	title: string
@@ -137,3 +138,8 @@ todos.forEach(item => {
 	// `item` is of type Todo here, so we get autocomplete 😎
 	console.log(item.title);
 });
+*/
+
+/**
+ * TypeScript and DOM
+ */
