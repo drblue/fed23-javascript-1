@@ -95,3 +95,45 @@ type StrangEllerTal = string | number;
 let x: StrangEllerTal = "42";
 x = 42;
 x = "lol";
+
+/**
+ * Interfaces
+ */
+
+interface Todo {
+	id: number
+	title: string
+	completed: boolean
+	due_date?: number
+}
+
+const todo1: Todo = {
+	id: 1,
+	title: "This is my first todo",
+	completed: false,
+	due_date: 1337
+}
+
+const todo2: Todo = {
+	id: 2,
+	title: "This is my second todo",
+	completed: false,
+}
+
+const todo3: Todo = {
+	id: 3,
+	title: "Such wow, much autocomplete, very type-safe",
+	completed: true,
+}
+
+// Array of Todo 🤩
+const todos: Todo[] = [
+	{ id: 1, title: "This is my first todo", completed: false, due_date: 1337 },
+	{ id: 2, title: "This is my second todo", completed: false },
+	{ id: 3, title: "Such wow, much autocomplete, very type-safe", completed: true },
+];
+
+todos.forEach(item => {
+	// `item` is of type Todo here, so we get autocomplete 😎
+	console.log(item.title);
+});
