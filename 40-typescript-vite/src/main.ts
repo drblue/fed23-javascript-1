@@ -55,6 +55,7 @@ greet3("hangry");
 greet3(undefined, 3);
 */
 
+/*
 const fancyGreet = (username = "anonymouse", age?: number) => {
 	if (!age) {
 		return `Oh hello there good sir/ma'am, ${username}!`;
@@ -74,3 +75,23 @@ const ages = [2, 4, 1, 3, 5, 2, 1, 3, 4, 5, 2, 1, 3, 4, 5];
 ages.forEach(age => {
 	// console.log(age.toLocaleUpperCase());  // Error: Property 'toLocaleUpperCase' does not exist on type 'number'.ts(2339)
 });
+*/
+
+/**
+ * Type Aliases
+ */
+
+type strang = string;
+
+let username: strang;
+username = "Johan";
+console.log(typeof username);  // "string", as all types are removed at runtime
+
+// let x: number | string = 42;
+// x = "1337";
+
+type StrangEllerTal = string | number;
+
+let x: StrangEllerTal = "42";
+x = 42;
+x = "lol";
