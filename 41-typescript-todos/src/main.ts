@@ -1,3 +1,16 @@
+/**
+ * TypeScript Todos
+ *
+ * Steg 1
+ * Lägg till funktionalitet för att radera en todo (antingen med findIndex/splice)
+ * eller array-filter
+ *
+ * Steg 2
+ * Lägg till funktionalitet så man kan skapa en ny todo med hjälp av formuläret
+ * `formCreateTodoEl` och input-elementet `formCreateTodoEl`.
+ *
+ */
+
 import "bootstrap/dist/css/bootstrap.css";
 import "./style.css";
 
