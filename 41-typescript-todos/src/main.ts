@@ -3,11 +3,11 @@
  *
  * Steg 1
  * Lägg till funktionalitet för att radera en todo (antingen med findIndex/splice)
- * eller array-filter
+ * eller array-filter.
  *
  * Steg 2
  * Lägg till funktionalitet så man kan skapa en ny todo med hjälp av formuläret
- * `formCreateTodoEl` och input-elementet `formCreateTodoEl`.
+ * `formCreateTodoEl` och input-elementet `inputNewTodoTitleEl`.
  *
  */
 
@@ -15,8 +15,9 @@ import "bootstrap/dist/css/bootstrap.css";
 import "./style.css";
 
 const todolistEl = document.querySelector<HTMLUListElement>("#todolist")!;
-const formCreateTodoEl = document.querySelector("#formCreateTodo");
-const inputNewTodoTitleEl = document.querySelector("#inputNewTodoTitle");
+const formCreateTodoEl = document.querySelector<HTMLFormElement>("#formCreateTodo");
+const inputNewTodoTitleEl = document.querySelector<HTMLInputElement>("#inputNewTodoTitle");
+//              ^?
 
 interface Todo {
 	id: number
@@ -41,6 +42,44 @@ const renderTodos = () => {
 		`)
 		.join("");
 }
+
+formCreateTodoEl?.addEventListener("submit", (e) => {
+	e.preventDefault();
+
+	const newTodoTitle = inputNewTodoTitleEl?.value || "";
+//             ^?
+
+	if (newTodoTitle.length < 3) {
+		alert("Too short todo to do!");
+		return;
+	}
+
+	// const maxTodoId = todos.reduce( (maxId, todo) => {
+	// 	if (todo.id > maxId) {
+	// 		return todo.id;
+	// 	}
+	// 	return maxId;
+	// }, 0 );
+
+	const maxTodoId = todos.reduce( (maxId, todo) => {
+		return (todo.id > maxId)
+			? todo.id
+			: maxId;
+	}, 0 );
+
+	// const allTodoIds = todos.map(todo => todo.id);
+	// const maxTodoId = Math.max(...allTodoIds);
+
+	const newTodo: Todo = {
+		id: maxTodoId + 1,
+		title: newTodoTitle,
+		completed: false,
+	}
+
+	todos.push(newTodo);
+
+	renderTodos();
+});
 
 todolistEl.addEventListener("click", (e) => {
 	console.log("You clicked, wow", e.target);
