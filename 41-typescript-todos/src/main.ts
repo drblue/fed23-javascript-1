@@ -24,7 +24,7 @@ interface Todo {
 	completed: boolean
 }
 
-const todos: Todo[] = [
+let todos: Todo[] = [
 	{ id: 1, title: "Wake up", completed: true },
 	{ id: 2, title: "Drink coffee", completed: true },
 	{ id: 3, title: "Code", completed: false },
@@ -69,6 +69,14 @@ todolistEl.addEventListener("click", (e) => {
 	} else if (target.tagName === "BUTTON") {
 		// delete todo
 
+		// get id of todo
+		const todoId = Number(target.parentElement?.dataset.todoId); // data-todo-id=""
+
+		// filter todos and exclude the todo we want to delete
+		todos = todos.filter(todo => todo.id !== todoId);
+
+		// re-render the todos list
+		renderTodos();
 	}
 });
 
