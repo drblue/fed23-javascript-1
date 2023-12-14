@@ -25,12 +25,18 @@ interface Todo {
 	completed: boolean
 }
 
-let todos: Todo[] = [
-	{ id: 1, title: "Wake up", completed: true },
-	{ id: 2, title: "Drink coffee", completed: true },
-	{ id: 3, title: "Code", completed: false },
-	{ id: 4, title: "Sleep", completed: false },
-];
+// get JSON-todos from localStorage
+const json = localStorage.getItem("todos") || "[]";  // we need to account for that todos may not yet exist in localStorage
+//      ^?
+
+let todos: Todo[] = JSON.parse(json);
+
+// let todos: Todo[] = [
+// 	{ id: 1, title: "Wake up", completed: true },
+// 	{ id: 2, title: "Drink coffee", completed: true },
+// 	{ id: 3, title: "Code", completed: false },
+// 	{ id: 4, title: "Sleep", completed: false },
+// ];
 
 const renderTodos = () => {
 	todolistEl.innerHTML = todos
@@ -41,6 +47,12 @@ const renderTodos = () => {
 			</li>
 		`)
 		.join("");
+}
+
+const saveTodos = () => {
+	// save todos to localStorage
+	const json = JSON.stringify(todos);
+	localStorage.setItem("todos", json);
 }
 
 formCreateTodoEl?.addEventListener("submit", (e) => {
@@ -78,6 +90,8 @@ formCreateTodoEl?.addEventListener("submit", (e) => {
 
 	todos.push(newTodo);
 
+	saveTodos();
+
 	renderTodos();
 });
 
@@ -102,6 +116,9 @@ todolistEl.addEventListener("click", (e) => {
 //               ^?
 		}
 
+		// save todos
+		saveTodos();
+
 		// re-render the todos list
 		renderTodos();
 
@@ -113,6 +130,9 @@ todolistEl.addEventListener("click", (e) => {
 
 		// filter todos and exclude the todo we want to delete
 		todos = todos.filter(todo => todo.id !== todoId);
+
+		// save todos
+		saveTodos();
 
 		// re-render the todos list
 		renderTodos();
