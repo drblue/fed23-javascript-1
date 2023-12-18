@@ -7,8 +7,23 @@
 	<title>42-async-todos-ts</title>
 </head>
 
-<body>
-	<div id="app"></div>
+<body class="bg-dark text-white">
+	<div id="app" class="container my-3">
+		<h1 class="mb-4">Async TypeScript Todos</h1>
+
+		<ul id="todolist" class="todos list-group mb-5"></ul>
+
+		<form id="formCreateTodo">
+			<div class="mb-3">
+				<label for="inputNewTodoTitle" class="form-label">Title</label>
+				<input type="text" class="form-control" id="inputNewTodoTitle" placeholder="Where's my car?!">
+			</div>
+
+			<button type="submit" class="btn btn-success">Dude!</button>
+			<button type="reset" class="btn btn-warning">Sweet!</button>
+		</form>
+	</div>
+
 	<script type="module" src="/src/main.ts"></script>
 </body>
 </html>
