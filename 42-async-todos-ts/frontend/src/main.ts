@@ -55,11 +55,16 @@ const fetchTodos = async () => {
  * Get todos from server, update local copy and render todos
  */
 const getAndRenderTodos = async () => {
-	// Fetch todos from server and updates local copy
-	todos = await fetchTodos();
+	try {
+		// Fetch todos from server and updates local copy
+		todos = await fetchTodos();
 
-	// Render dem todos
-	renderTodos();
+		// Render dem todos
+		renderTodos();
+
+	} catch (err) {
+		alert("Could not get todos, try again later?");
+	}
 }
 
 /**
@@ -100,18 +105,21 @@ formCreateTodoEl?.addEventListener("submit", async (e) => {
 	}
 	console.log("Will send newTodo to API:", newTodo);
 
-	// POST todo to the API
-	await createTodo(newTodo);
+	try {
+		// POST todo to the API
+		await createTodo(newTodo);
 
-	// Get the updated list of todos from the API
-	getAndRenderTodos();
+		// Get the updated list of todos from the API
+		getAndRenderTodos();
 
-	// Finally, clear the input-field
-	if (inputNewTodoTitleEl) {
-		inputNewTodoTitleEl.value = "";
+		// Finally, clear the input-field
+		if (inputNewTodoTitleEl) {
+			inputNewTodoTitleEl.value = "";
+		}
+	} catch (err) {
+		alert("Could not create todo. Please give the server a hug.");
 	}
 });
-
 
 // Get and render todos on page load
 getAndRenderTodos();
