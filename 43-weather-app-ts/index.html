@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<link rel="icon" type="image/svg+xml" href="/vite.svg" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>43-weather-app-ts</title>
+</head>
+
+<body class="bg-dark text-white">
+	<div id="app" class="container">
+
+		<div id="search-wrapper">
+			<form id="search-form">
+				<div class="input-group">
+					<input type="text" id="query" class="form-control" required placeholder="Enter city to search for" aria-label="City" aria-details="Search for city to show current weather for.">
+					<button type="submit" class="btn btn-success">🔍</button>
+				</div>
+			</form>
+		</div>
+
+		<div id="spinner" class="hide" role="status">
+			<span class="visually-hidden">Loading...</span>
+			<img src="assets/images/loading.gif" class="img-fluid">
+		</div>
+
+		<div id="alert" class="hide" role="alert"></div>
+
+		<div id="forecast" class="card text-black hide"></div>
+	</div>
+
+	<script type="module" src="/src/main.ts"></script>
+</body>
+</html>
