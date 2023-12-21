@@ -4,7 +4,7 @@
  * <https://openweathermap.org/current>
  */
 
-const API_KEY = "7d07164c415624a8f477cd253d231922";
+const API_KEY = import.meta.env.VITE_OWM_APIKEY;
 const BASE_URL = "https://api.openweathermap.org/data/2.5";
 
 const FAKE_SLOW_API = true;
