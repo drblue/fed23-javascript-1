@@ -85,7 +85,7 @@ document.querySelector("#search-form")!.addEventListener("submit", async (e) => 
 	alertEl.className = "hide";
 
 	// Get value from input-field
-	const city = target.query.value.trim();
+	const city: string = target.query.value.trim();
 
 	// Make sure input is at least somewhat valid
 	if (city.length < 3) {
@@ -101,6 +101,9 @@ document.querySelector("#search-form")!.addEventListener("submit", async (e) => 
 		const data = await getCurrentWeather(city);
 //        ^?
 
+		// save city to localstorage
+		localStorage.setItem("weather_city", city);
+
 		// render (and then show) current weather conditions
 		renderCurrentWeather(data);
 		forecastEl.classList.remove("hide");
@@ -114,3 +117,6 @@ document.querySelector("#search-form")!.addEventListener("submit", async (e) => 
 	// hide loading spinner
 	spinnerEl.classList.add("hide");
 });
+
+// set query-input to any previously saved city in localStorage
+document.querySelector<HTMLInputElement>("#query")!.value = localStorage.getItem("weather_city") ?? "";
