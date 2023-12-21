@@ -4,6 +4,8 @@
  * <https://openweathermap.org/current>
  */
 
+import { WeatherReport } from "../types/owmapi.types";
+
 const API_KEY = import.meta.env.VITE_OWM_APIKEY;
 const BASE_URL = "https://api.openweathermap.org/data/2.5";
 
@@ -20,7 +22,7 @@ export const getCurrentWeather = async (city: string) => {
 	}
 
 	// Convert response from JSON
-	const data = await response.json();
+	const data: WeatherReport = await response.json();
 
 	// Fake slow API
 	FAKE_SLOW_API && await new Promise(r => setTimeout(r, FAKE_SLOW_API_DELAY));

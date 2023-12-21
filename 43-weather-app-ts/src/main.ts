@@ -2,35 +2,37 @@
  * 🌧️.
  *
  */
+import { getCurrentWeather } from "./services/owmapi";
 
 import "bootstrap/dist/css/bootstrap.css";
 import "./assets/css/style.css";
+import { WeatherReport } from "./types/owmapi.types";
 
 console.log("API key from env is:", import.meta.env.VITE_OWM_APIKEY);
 console.log("Environment:", import.meta.env);
 
-const alertEl = document.querySelector("#alert");
-const forecastEl = document.querySelector("#forecast");
-const spinnerEl = document.querySelector("#spinner");
+const alertEl = document.querySelector<HTMLElement>("#alert")!;
+const forecastEl = document.querySelector<HTMLElement>("#forecast")!;
+const spinnerEl = document.querySelector<HTMLElement>("#spinner")!;
 
-const renderNotice = (msg, severity = "info") => {
+const renderNotice = (msg: string, severity = "info") => {
 	alertEl.innerText = msg;
 	alertEl.className = `alert alert-${severity}`;
 }
 
-const renderErrorNotice = msg => renderNotice(msg, "danger");
-const renderInfoNotice = msg => renderNotice(msg, "info");
-const renderWarningNotice = msg => renderNotice(msg, "warning");
+const renderErrorNotice = (msg: string) => renderNotice(msg, "danger");
+const renderInfoNotice = (msg: string) => renderNotice(msg, "info");
+// const renderWarningNotice = (msg: string) => renderNotice(msg, "warning");
 
 // Render current weather conditions
-const renderCurrentWeather = (conditions) => {
+const renderCurrentWeather = (conditions: WeatherReport) => {
 	const icons = conditions.weather.map(condition =>
 		`<li><img src="http://openweathermap.org/img/wn/${condition.icon}@2x.png" alt="${condition.main}" title="${condition.description}"></li>`);
 
 	// determine if it's daytime or nighttime
 	const banner = (conditions.dt > conditions.sys.sunrise && conditions.dt < conditions.sys.sunset)
-		? "assets/images/day.svg"
-		: "assets/images/night.svg";
+		? "/src/assets/images/day.svg"
+		: "/src/assets/images/night.svg";
 
 	/*
 	// same as above, but not as pretty 😅
@@ -73,15 +75,17 @@ const renderCurrentWeather = (conditions) => {
 }
 
 // Listen for when the user wants to get weather conditions for a city
-document.querySelector("#search-form").addEventListener("submit", async (e) => {
+document.querySelector("#search-form")!.addEventListener("submit", async (e) => {
 	e.preventDefault();
+
+	const target = e.target as HTMLFormElement;
 
 	// Hide any previous current weather conditions and errors
 	forecastEl.classList.add("hide");
 	alertEl.className = "hide";
 
 	// Get value from input-field
-	const city = e.target.query.value.trim();
+	const city = target.query.value.trim();
 
 	// Make sure input is at least somewhat valid
 	if (city.length < 3) {
@@ -95,6 +99,7 @@ document.querySelector("#search-form").addEventListener("submit", async (e) => {
 
 		// Get weather for city
 		const data = await getCurrentWeather(city);
+//        ^?
 
 		// render (and then show) current weather conditions
 		renderCurrentWeather(data);
@@ -102,7 +107,7 @@ document.querySelector("#search-form").addEventListener("submit", async (e) => {
 
 	} catch (err) {
 		// Something went wrong!
-		renderErrorNotice(err);
+		renderErrorNotice(err as string);
 
 	}
 
