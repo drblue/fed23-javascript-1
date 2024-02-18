@@ -1,0 +1,9 @@
+.todo-title {
+	cursor: pointer;
+}
+
+.completed .todo-title {
+	color: var(--bs-gray-500);
+	font-style: italic;
+	text-decoration: line-through;
+}

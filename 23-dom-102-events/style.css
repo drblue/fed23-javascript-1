@@ -1,0 +1,17 @@
+.completed {
+	font-style: italic;
+	text-decoration: line-through;
+}
+
+ul {
+	background-color: #deb887;
+	/* cursor: pointer; */
+	padding: 1rem 2rem;
+}
+
+li {
+	background-color: bisque;
+	cursor: pointer;
+	margin: 1rem 0;
+	padding: 0.5rem;
+}
